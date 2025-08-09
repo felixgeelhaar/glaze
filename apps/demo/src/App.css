@@ -1,0 +1,10 @@
+/* Import Glaze tokens and components */
+@import '@glaze/components/styles/tokens.css';
+@import '@glaze/components/styles/components.css';
+
+/* Additional app styles */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}

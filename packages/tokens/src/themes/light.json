@@ -1,0 +1,17 @@
+{
+  "palette": {
+    "slate": {
+      "2": { "value": "#F8FAFC" },
+      "3": { "value": "#F1F5F9" },
+      "12": { "value": "#0B1220" }
+    },
+    "indigo": {
+      "1": { "value": "#EEF2FF" },
+      "9": { "value": "#4F46E5" }
+    },
+    "pink": {
+      "1": { "value": "#FFF0F6" },
+      "9": { "value": "#DB2777" }
+    }
+  }
+}

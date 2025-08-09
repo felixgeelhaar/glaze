@@ -1,0 +1,96 @@
+{
+  "name": "@glaze/components",
+  "version": "1.0.0",
+  "description": "Beautiful glassmorphism Web Components built with Lit",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc --pretty false && cp -r src/styles dist/",
+    "dev": "tsc --watch",
+    "test": "wtr",
+    "test:watch": "wtr --watch",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "size": "bundlesize",
+    "analyze": "cem analyze --litelement"
+  },
+  "keywords": [
+    "web-components",
+    "design-system",
+    "glassmorphism",
+    "lit",
+    "typescript",
+    "accessibility",
+    "ui",
+    "components"
+  ],
+  "author": "Glaze Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/glaze-design-system/glaze.git",
+    "directory": "packages/components"
+  },
+  "homepage": "https://glaze-design-system.com",
+  "bugs": {
+    "url": "https://github.com/glaze-design-system/glaze/issues"
+  },
+  "dependencies": {
+    "lit": "^3.1.0"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.9.0",
+    "@open-wc/testing": "^4.0.0",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@web/test-runner": "^0.18.0",
+    "@web/test-runner-playwright": "^0.11.0",
+    "bundlesize": "^0.18.1",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.0"
+  },
+  "customElements": "dist/custom-elements.json",
+  "bundlesize": [
+    {
+      "path": "./dist/index.js",
+      "maxSize": "50kb",
+      "compression": "gzip"
+    }
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "Chrome >= 61",
+    "Firefox >= 63",
+    "Safari >= 10.1",
+    "Edge >= 79"
+  ]
+}

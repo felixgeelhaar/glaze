@@ -1,0 +1,382 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentation/Glassmorphism Do & Don't" />
+
+# Glassmorphism Best Practices
+
+Master the art of glassmorphism with these essential guidelines for creating beautiful, functional interfaces.
+
+## ✅ DO's
+
+### 1. Use Appropriate Backgrounds
+
+#### ✅ DO: Use Vibrant, Complex Backgrounds
+Glassmorphism shines with colorful, detailed backgrounds that show through the blur.
+
+```css
+/* Good backgrounds for glass effects */
+.background {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* OR */
+  background-image: url('vibrant-abstract.jpg');
+}
+```
+
+**Examples:**
+- Gradient backgrounds
+- Abstract patterns
+- Blurred photography
+- Geometric shapes
+- Particle effects
+
+### 2. Maintain Sufficient Contrast
+
+#### ✅ DO: Ensure Readable Text
+Always maintain WCAG-compliant contrast ratios.
+
+```css
+.glass-card {
+  /* Light text on dark glass */
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.1);
+  
+  /* Or dark text on light glass */
+  color: rgba(0, 0, 0, 0.9);
+  background: rgba(255, 255, 255, 0.7);
+}
+```
+
+**Tips:**
+- Test contrast with different backgrounds
+- Use semi-opaque text colors
+- Add text shadows for better legibility
+- Provide high-contrast mode option
+
+### 3. Layer Elements Thoughtfully
+
+#### ✅ DO: Create Visual Hierarchy
+Use multiple glass layers to establish depth.
+
+```html
+<!-- Good layering example -->
+<div class="glass-background">
+  <glz-card variant="glass" style="backdrop-filter: blur(10px)">
+    <glz-card variant="glass" style="backdrop-filter: blur(5px)">
+      <!-- Nested content with less blur -->
+    </glz-card>
+  </glz-card>
+</div>
+```
+
+**Best Practices:**
+- Vary blur intensity by layer
+- Use different opacity levels
+- Add subtle shadows between layers
+- Keep nesting to 2-3 levels maximum
+
+### 4. Add Subtle Borders
+
+#### ✅ DO: Define Edges Clearly
+Borders help distinguish glass elements from backgrounds.
+
+```css
+.glass-element {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+```
+
+### 5. Optimize Performance
+
+#### ✅ DO: Use CSS Containment
+Improve rendering performance with containment.
+
+```css
+.glass-container {
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+```
+
+## ❌ DON'Ts
+
+### 1. Don't Use on Solid Colors
+
+#### ❌ DON'T: Apply to Plain Backgrounds
+Glass effects are invisible on solid colors.
+
+```css
+/* Bad - no visible effect */
+.solid-background {
+  background: #333333; /* Solid color */
+}
+.glass-on-solid {
+  backdrop-filter: blur(10px); /* Won't show */
+}
+```
+
+**Avoid:**
+- Single solid colors
+- Very dark backgrounds
+- Pure white/black backgrounds
+- Low-contrast patterns
+
+### 2. Don't Overuse Blur
+
+#### ❌ DON'T: Make Everything Blurry
+Too much blur reduces usability and performance.
+
+```css
+/* Bad - too much blur */
+.over-blurred {
+  backdrop-filter: blur(50px); /* Too heavy */
+}
+```
+
+**Problems:**
+- Reduces readability
+- Impacts performance
+- Creates visual fatigue
+- Loses the subtle effect
+
+### 3. Don't Ignore Accessibility
+
+#### ❌ DON'T: Sacrifice Readability for Aesthetics
+Never compromise accessibility for visual effects.
+
+```css
+/* Bad - poor contrast */
+.inaccessible-glass {
+  background: rgba(255, 255, 255, 0.05); /* Too transparent */
+  color: rgba(255, 255, 255, 0.3); /* Too faint */
+}
+```
+
+**Always Check:**
+- Color contrast ratios
+- Reduced transparency preferences
+- Motion sensitivity
+- Screen reader compatibility
+
+### 4. Don't Stack Too Many Layers
+
+#### ❌ DON'T: Create Glass Inception
+Too many nested glass elements create visual confusion.
+
+```html
+<!-- Bad - too many layers -->
+<glz-card variant="glass">
+  <glz-card variant="glass">
+    <glz-card variant="glass">
+      <glz-card variant="glass">
+        <!-- Too deep! -->
+      </glz-card>
+    </glz-card>
+  </glz-card>
+</glz-card>
+```
+
+### 5. Don't Animate Blur Intensity
+
+#### ❌ DON'T: Transition Blur Values
+Animating blur is performance-intensive and jarring.
+
+```css
+/* Bad - poor performance */
+.animated-blur {
+  transition: backdrop-filter 0.3s; /* Avoid */
+}
+.animated-blur:hover {
+  backdrop-filter: blur(20px); /* Janky */
+}
+```
+
+**Better Alternative:**
+Animate opacity or transform instead of blur.
+
+## Motion & Animation Guidelines
+
+### ✅ Good Motion Practices
+
+```css
+/* Smooth, performant animations */
+.glass-card {
+  transition: 
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+}
+```
+
+### ❌ Motion to Avoid
+
+```css
+/* Bad - animating expensive properties */
+.bad-animation {
+  transition: 
+    backdrop-filter 0.3s, /* Expensive */
+    filter 0.3s; /* Expensive */
+}
+```
+
+## Imagery & Content
+
+### ✅ Best Content for Glass
+
+1. **Abstract Backgrounds**
+   - Gradients
+   - Geometric patterns
+   - Noise textures
+   - Particle systems
+
+2. **Photography**
+   - Landscapes
+   - Architecture
+   - Abstract macro
+   - Bokeh effects
+
+3. **Dynamic Content**
+   - Video backgrounds
+   - WebGL scenes
+   - Canvas animations
+   - SVG patterns
+
+### ❌ Content to Avoid
+
+1. **Text-Heavy Backgrounds**
+   - Makes reading difficult
+   - Creates visual confusion
+
+2. **High-Frequency Patterns**
+   - Stripes
+   - Small grids
+   - Detailed textures
+
+3. **Low-Contrast Images**
+   - Doesn't show through glass
+   - Reduces the effect
+
+## Platform Considerations
+
+### Desktop
+
+```css
+/* Full glass effects for desktop */
+@media (min-width: 1024px) {
+  .glass {
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+```
+
+### Mobile
+
+```css
+/* Reduced effects for performance */
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: blur(8px); /* Less blur */
+    background: rgba(255, 255, 255, 0.15); /* More opacity */
+  }
+}
+```
+
+### Fallbacks
+
+```css
+/* Fallback for unsupported browsers */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+}
+```
+
+## Real-World Examples
+
+### ✅ Good Implementation
+
+```jsx
+// Dashboard with proper glass hierarchy
+<div className="dashboard-background">
+  <glz-card variant="glass" tone="neutral">
+    <h2>Analytics Overview</h2>
+    <div className="metrics-grid">
+      <glz-card variant="solid" size="sm">
+        <span>Total Users</span>
+        <strong>1,234</strong>
+      </glz-card>
+    </div>
+  </glz-card>
+</div>
+```
+
+### ❌ Poor Implementation
+
+```jsx
+// Everything is glass - no hierarchy
+<div className="solid-background">
+  <glz-card variant="glass">
+    <glz-button variant="glass">
+      <glz-input variant="glass" />
+    </glz-button>
+  </glz-card>
+</div>
+```
+
+## Performance Optimization
+
+### Measure Impact
+
+```javascript
+// Monitor rendering performance
+const observer = new PerformanceObserver((list) => {
+  list.getEntries().forEach((entry) => {
+    if (entry.entryType === 'paint') {
+      console.log(`${entry.name}: ${entry.startTime}ms`);
+    }
+  });
+});
+
+observer.observe({ entryTypes: ['paint'] });
+```
+
+### Optimize Selectively
+
+```css
+/* Apply glass only when needed */
+.glass-hero {
+  backdrop-filter: blur(10px); /* Hero section */
+}
+
+.content-cards {
+  background: rgba(255, 255, 255, 0.95); /* Solid for content */
+}
+```
+
+## Summary
+
+### Quick Checklist
+
+- ✅ Vibrant, complex backgrounds
+- ✅ Sufficient contrast (WCAG AA)
+- ✅ Subtle borders and shadows
+- ✅ Performance optimization
+- ✅ Accessibility considerations
+- ❌ Solid color backgrounds
+- ❌ Excessive blur
+- ❌ Too many layers
+- ❌ Animated blur effects
+- ❌ Poor contrast ratios
+
+Remember: Glassmorphism is a tool, not a requirement. Use it where it enhances the user experience, not everywhere possible.

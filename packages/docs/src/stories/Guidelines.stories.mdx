@@ -1,0 +1,226 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Guidelines/Glass Design Patterns" />
+
+# Glass Design Patterns
+
+Best practices for using glassmorphism effects in the Glaze Design System.
+
+## When to Use Glass Effects
+
+### ✅ DO: Use Glass for Overlays
+
+Glass effects work best when content overlays other elements:
+- Modal dialogs over page content
+- Floating action buttons
+- Navigation bars over hero images
+- Cards on gradient backgrounds
+- Toasts and notifications
+
+```html
+<!-- Good: Glass dialog over content -->
+<glz-dialog variant="glass" open>
+  <h2>Overlay Content</h2>
+  <p>Glass effect creates depth and hierarchy</p>
+</glz-dialog>
+```
+
+### ❌ DON'T: Use Glass on Solid Backgrounds
+
+Avoid glass effects on plain, solid-colored backgrounds where the effect is lost:
+- White or black backgrounds with no texture
+- Single-color surfaces with no variation
+- Areas with no content behind to blur
+
+```html
+<!-- Bad: Glass on white background -->
+<div style="background: white">
+  <glz-card variant="glass">
+    <!-- Effect is wasted here -->
+  </glz-card>
+</div>
+```
+
+## Contrast and Readability
+
+### ✅ DO: Ensure Sufficient Contrast
+
+Always maintain WCAG AA contrast ratios:
+- Test glass components over various backgrounds
+- Use the high-contrast theme when needed
+- Add subtle borders for definition
+- Consider text shadows for improved readability
+
+```css
+/* Good: Enhanced readability */
+.glass-text {
+  color: var(--color-surface-on);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+```
+
+### ❌ DON'T: Sacrifice Readability for Aesthetics
+
+Never compromise text legibility:
+- Avoid glass over busy, high-contrast images
+- Don't use light text on light glass
+- Don't remove borders when they aid visibility
+
+## Performance Considerations
+
+### ✅ DO: Use Glass Sparingly
+
+Limit the number of glass elements for better performance:
+- Maximum 2-3 glass surfaces visible at once
+- Use `will-change: backdrop-filter` sparingly
+- Consider `variant="subtle"` for better performance
+- Provide reduced-transparency fallbacks
+
+```html
+<!-- Good: Performance-conscious -->
+<glz-navbar variant="subtle" />
+<main>
+  <glz-card variant="solid">Main content</glz-card>
+  <glz-dialog variant="glass">Focus element</glz-dialog>
+</main>
+```
+
+### ❌ DON'T: Stack Multiple Glass Layers
+
+Avoid layering glass effects:
+- Don't nest glass components inside glass components
+- Don't animate multiple glass elements simultaneously
+- Don't use glass for large background areas
+
+## Accessibility
+
+### ✅ DO: Respect User Preferences
+
+Always provide fallbacks for accessibility:
+- Honor `prefers-reduced-transparency`
+- Support `prefers-reduced-motion`
+- Ensure keyboard navigation works
+- Test with screen readers
+
+```html
+<!-- Good: Accessible implementation -->
+<glz-card 
+  variant="glass"
+  role="article"
+  aria-label="Product card"
+>
+  <h3>Accessible Glass</h3>
+  <p>Respects user preferences automatically</p>
+</glz-card>
+```
+
+### ❌ DON'T: Rely Solely on Visual Effects
+
+Never use glass as the only indicator:
+- Don't indicate state only through transparency
+- Don't hide important UI behind heavy blur
+- Don't remove focus indicators on glass elements
+
+## Mobile and Touch
+
+### ✅ DO: Optimize for Mobile
+
+Adapt glass effects for mobile devices:
+- Reduce blur intensity on mobile
+- Increase touch target sizes (min 44x44px)
+- Test on real devices
+- Consider battery impact
+
+```css
+/* Good: Mobile optimization */
+@media (max-width: 768px) {
+  .glass {
+    --blur-md: 8px; /* Reduced from 12px */
+  }
+}
+```
+
+### ❌ DON'T: Overuse on Mobile
+
+Be conservative with effects on mobile:
+- Don't use glass for scrollable areas
+- Don't apply to frequently updated content
+- Don't use for input fields on mobile
+
+## Theme Integration
+
+### ✅ DO: Design for All Themes
+
+Ensure glass works across themes:
+- Test in light, dark, and high-contrast modes
+- Adjust tint opacity per theme
+- Maintain consistency across variants
+
+```javascript
+// Good: Theme-aware glass
+const card = document.querySelector('glz-card');
+card.setAttribute('data-theme', 'dark');
+```
+
+### ❌ DON'T: Hard-Code Colors
+
+Avoid fixed colors that break theming:
+- Don't override CSS variables
+- Don't use inline styles for glass properties
+- Don't assume a specific theme
+
+## Common Patterns
+
+### Hero Sections
+```html
+<section class="hero">
+  <glz-navbar variant="glass" sticky />
+  <div class="hero-content">
+    <glz-card variant="glass">
+      <h1>Welcome</h1>
+      <p>Glass creates depth over images</p>
+    </glz-card>
+  </div>
+</section>
+```
+
+### Floating Actions
+```html
+<glz-button variant="glass" class="fab">
+  <span aria-label="Add item">+</span>
+</glz-button>
+```
+
+### Modal Overlays
+```html
+<glz-dialog variant="glass" open>
+  <h2>Confirmation</h2>
+  <p>Glass modals feel lighter than solid ones</p>
+  <glz-button variant="primary">Confirm</glz-button>
+</glz-dialog>
+```
+
+## Testing Checklist
+
+Before shipping glass components:
+
+- [ ] Test on various background images and colors
+- [ ] Verify WCAG AA contrast (4.5:1 for text)
+- [ ] Check reduced-transparency mode
+- [ ] Test keyboard navigation
+- [ ] Verify screen reader announcements
+- [ ] Test on mobile devices
+- [ ] Check performance with DevTools
+- [ ] Validate in all theme modes
+- [ ] Test with real content, not lorem ipsum
+- [ ] Verify in different browsers (Safari, Chrome, Firefox)
+
+## Summary
+
+Glass effects should enhance, not dominate your design. Use them strategically to:
+- Create visual hierarchy
+- Indicate interactive elements
+- Add depth to overlays
+- Enhance brand identity
+
+Remember: **Less is more**. A subtle glass effect that's accessible and performant is better than a heavy effect that causes issues.

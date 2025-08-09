@@ -1,0 +1,132 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm -w build
+
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm changeset publish --dry-run
+          version: pnpm changeset version
+          commit: 'chore: release packages'
+          title: 'chore: release packages'
+          createGithubReleases: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Log dry-run output
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "🚀 Dry-run Release Summary"
+          echo "========================"
+          echo "The following packages would be published:"
+          echo "${{ steps.changesets.outputs.publishedPackages }}"
+          echo ""
+          echo "Note: This is a dry-run. No packages were actually published."
+          echo "To publish for real, remove the --dry-run flag from the publish command."
+
+      - name: Send release notification
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "📦 Release notification would be sent here"
+          echo "Packages that would be released:"
+          echo "${{ steps.changesets.outputs.publishedPackages }}"
+
+  # Optional: Publish to GitHub Packages
+  publish-gpr:
+    name: Publish to GitHub Packages (Dry Run)
+    runs-on: ubuntu-latest
+    needs: release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js for GitHub Packages
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@glaze'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm -w build
+
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "@glaze:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+
+      - name: Publish to GitHub Packages (Dry Run)
+        run: |
+          echo "🎭 GitHub Packages Dry Run"
+          echo "========================="
+          echo "Would publish the following packages to GitHub Packages:"
+          
+          for pkg in packages/*/package.json; do
+            if [ -f "$pkg" ]; then
+              PKG_NAME=$(node -p "require('$pkg').name")
+              PKG_VERSION=$(node -p "require('$pkg').version")
+              echo "  - $PKG_NAME@$PKG_VERSION"
+            fi
+          done
+          
+          echo ""
+          echo "Note: This is a dry-run. No packages were published to GitHub Packages."
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

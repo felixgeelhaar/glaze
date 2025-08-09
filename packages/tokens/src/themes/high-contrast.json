@@ -1,0 +1,29 @@
+{
+  "palette": {
+    "slate": {
+      "2": { "value": "#FFFFFF" },
+      "3": { "value": "#F3F4F6" },
+      "12": { "value": "#000000" }
+    },
+    "indigo": {
+      "1": { "value": "#FFFFFF" },
+      "9": { "value": "#3730A3" }
+    },
+    "pink": {
+      "1": { "value": "#FFFFFF" },
+      "9": { "value": "#BE185D" }
+    }
+  },
+  "color": {
+    "glass": {
+      "tintLight": { "value": "rgba(255,255,255,0.20)" },
+      "tintDark": { "value": "rgba(0,0,0,0.30)" },
+      "border": { "value": "rgba(0,0,0,0.40)" }
+    }
+  },
+  "elevation": {
+    "glass": { "value": "0 1px 0 rgba(0,0,0,.30) inset, 0 8px 24px rgba(0,0,0,.30)" },
+    "1": { "value": "0 1px 2px rgba(0,0,0,.10)" },
+    "2": { "value": "0 4px 12px rgba(0,0,0,.12)" }
+  }
+}

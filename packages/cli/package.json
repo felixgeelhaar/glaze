@@ -1,0 +1,23 @@
+{
+  "name": "@glaze/cli",
+  "version": "0.0.0",
+  "type": "module",
+  "bin": {
+    "glaze": "./dist/index.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc --pretty false && chmod +x dist/index.js",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "lint": "eslint src --ext .ts",
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "@glaze/tokens": "workspace:*",
+    "@glaze/engine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3"
+  }
+}

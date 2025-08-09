@@ -1,0 +1,191 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title="Documentation/Getting Started" />
+
+# Getting Started with Glaze Design System
+
+Welcome to Glaze, a modern design system built on glassmorphism principles with Web Components at its core.
+
+## Installation
+
+Glaze is distributed as a monorepo with separate packages for different needs:
+
+### Core Components (Web Components)
+
+```bash
+npm install @glaze/components @glaze/tokens
+```
+
+### Framework Integrations
+
+For React applications:
+```bash
+npm install @glaze/react
+```
+
+For Vue applications:
+```bash
+npm install @glaze/vue
+```
+
+## Basic Usage
+
+### Web Components (Vanilla)
+
+First, import the components and styles:
+
+```html
+<!-- Import CSS -->
+<link rel="stylesheet" href="node_modules/@glaze/components/dist/styles/tokens.css">
+<link rel="stylesheet" href="node_modules/@glaze/components/dist/styles/components.css">
+
+<!-- Import JavaScript -->
+<script type="module">
+  import '@glaze/components';
+</script>
+```
+
+Then use the components in your HTML:
+
+```html
+<glz-button variant="glass" tone="primary">
+  Click Me
+</glz-button>
+
+<glz-card variant="glass" size="lg">
+  <h2>Beautiful Card</h2>
+  <p>With glassmorphism effects</p>
+</glz-card>
+```
+
+### React Integration
+
+```jsx
+import { Button, Card } from '@glaze/react';
+import '@glaze/components/styles/tokens.css';
+import '@glaze/components/styles/components.css';
+
+function App() {
+  return (
+    <Card variant="glass" size="lg">
+      <h2>React App</h2>
+      <Button variant="solid" tone="primary">
+        Get Started
+      </Button>
+    </Card>
+  );
+}
+```
+
+### Vue Integration
+
+```vue
+<template>
+  <glz-card variant="glass" size="lg">
+    <h2>Vue App</h2>
+    <glz-button variant="solid" tone="primary">
+      Get Started
+    </glz-button>
+  </glz-card>
+</template>
+
+<script setup>
+import { GlazePlugin } from '@glaze/vue';
+import '@glaze/components/styles/tokens.css';
+import '@glaze/components/styles/components.css';
+</script>
+```
+
+## Design Tokens
+
+Glaze uses a comprehensive token system for consistent theming:
+
+### Color Tokens
+- **Palette**: Semantic color scales (slate, indigo, pink)
+- **Glass Effects**: Tint, blur, and border tokens
+- **Elevation**: Shadow tokens for depth
+
+### Spacing & Typography
+- **Spacing**: Consistent spacing scale (xs, sm, md, lg, xl)
+- **Typography**: Font families, sizes, weights, and line heights
+- **Radius**: Border radius tokens for rounded corners
+
+### Using Tokens
+
+Access tokens via CSS custom properties:
+
+```css
+.custom-element {
+  color: var(--glz-color-primary-9);
+  padding: var(--glz-spacing-md);
+  border-radius: var(--glz-radius-lg);
+  backdrop-filter: blur(var(--glz-glass-blur));
+}
+```
+
+## Tailwind Engine Integration
+
+If you're using Tailwind CSS, install the Glaze engine:
+
+```bash
+npm install @glaze/engine
+```
+
+Configure in your `tailwind.config.js`:
+
+```javascript
+import { glazePlugin } from '@glaze/engine';
+
+export default {
+  plugins: [
+    glazePlugin({
+      prefix: 'glz',
+      themes: ['light', 'dark', 'high-contrast']
+    })
+  ]
+};
+```
+
+This provides Tailwind utilities for all Glaze tokens:
+
+```html
+<div class="glz-glass-tint glz-blur-glass glz-radius-lg">
+  Glassmorphism with Tailwind
+</div>
+```
+
+## Component Architecture
+
+### Web Components Foundation
+All Glaze components are built with Lit, providing:
+- Framework-agnostic usage
+- Shadow DOM encapsulation
+- Reactive properties
+- Efficient rendering
+
+### Accessibility First
+Every component follows WCAG 2.2 AA guidelines:
+- Proper ARIA attributes
+- Keyboard navigation
+- Focus management
+- Screen reader support
+
+### Performance Optimized
+- Lazy loading with dynamic imports
+- Minimal bundle size
+- CSS containment
+- Efficient re-renders
+
+## Next Steps
+
+- Explore [Theming](/?path=/docs/documentation-theming--docs) to customize your design
+- Review [Accessibility](/?path=/docs/documentation-accessibility--docs) guidelines
+- Learn [Glassmorphism Best Practices](/?path=/docs/documentation-glassmorphism-do-dont--docs)
+- Try the [Theme Playground](/?path=/story/playground-theme-customizer--default) to experiment with styles
+
+## Support
+
+- **Documentation**: Full API docs for each component
+- **Examples**: Interactive stories with source code
+- **TypeScript**: Full type definitions included
+- **Source Maps**: Debug with original source code

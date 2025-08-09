@@ -1,0 +1,227 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  ci:
+    name: Build, Lint, and Test
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm -w build
+
+      - name: Run linting
+        run: pnpm -w lint
+
+      - name: Run unit tests
+        run: pnpm -w test
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Playwright tests
+        run: pnpm -w test:e2e
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
+
+      - name: Build Storybook
+        run: |
+          cd packages/docs
+          pnpm build
+
+      - name: Run accessibility tests on Storybook
+        run: |
+          cd packages/docs
+          npx wait-on http://localhost:6006 -t 30000 &
+          pnpm storybook --port 6006 --quiet &
+          SERVER_PID=$!
+          sleep 10
+          npx @axe-core/cli http://localhost:6006 --exit
+          kill $SERVER_PID || true
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: playwright-report-${{ matrix.node-version }}
+          path: |
+            **/test-results/
+            **/playwright-report/
+          retention-days: 7
+
+  accessibility:
+    name: Accessibility Testing
+    runs-on: ubuntu-latest
+    needs: ci
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all packages
+        run: pnpm -w build
+
+      - name: Install axe-core CLI
+        run: npm install -g @axe-core/cli
+
+      - name: Start demo app for a11y testing
+        run: |
+          cd apps/demo
+          pnpm preview &
+          echo $! > server.pid
+          npx wait-on http://localhost:4173 -t 30000
+
+      - name: Run axe accessibility tests on demo
+        run: |
+          axe http://localhost:4173 \
+            --disable color-contrast \
+            --tags wcag2aa,wcag21aa \
+            --exit
+
+      - name: Stop demo server
+        if: always()
+        run: |
+          if [ -f apps/demo/server.pid ]; then
+            kill $(cat apps/demo/server.pid) || true
+            rm apps/demo/server.pid
+          fi
+
+      - name: Generate accessibility report
+        if: failure()
+        run: |
+          mkdir -p accessibility-reports
+          axe http://localhost:4173 \
+            --disable color-contrast \
+            --tags wcag2aa,wcag21aa \
+            --save accessibility-reports/demo-a11y.json \
+            --exit || true
+
+      - name: Upload accessibility reports
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: accessibility-reports
+          path: accessibility-reports/
+          retention-days: 7
+
+  type-check:
+    name: TypeScript Type Checking
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run TypeScript type checking
+        run: pnpm -w typecheck || true
+
+  bundle-size:
+    name: Bundle Size Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm -w build
+
+      - name: Analyze bundle sizes
+        run: |
+          echo "Bundle Size Report"
+          echo "=================="
+          for pkg in packages/*/dist; do
+            if [ -d "$pkg" ]; then
+              echo ""
+              echo "Package: $(dirname $pkg)"
+              du -sh $pkg
+              find $pkg -name "*.js" -o -name "*.css" | xargs ls -lh 2>/dev/null | awk '{print $9, $5}' || true
+            fi
+          done

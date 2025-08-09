@@ -1,0 +1,30 @@
+{
+  "name": "@glaze/tokens",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/ts/index.js",
+  "types": "./dist/ts/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/ts/index.d.ts",
+      "import": "./dist/ts/index.js"
+    },
+    "./css": "./dist/css/tokens.css",
+    "./figma": "./dist/figma/tokens.json"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "node src/build.js",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "style-dictionary": "^3.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  }
+}

@@ -1,0 +1,309 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentation/Theming" />
+
+# Theming in Glaze
+
+Glaze provides a flexible theming system that adapts to different visual needs and user preferences.
+
+## Theme Variants
+
+### Built-in Themes
+
+Glaze ships with three carefully crafted themes:
+
+#### Light Theme
+Optimized for bright environments with subtle glass effects:
+- Higher contrast ratios
+- Lighter glass tints
+- Softer shadows
+
+```html
+<body data-theme="light">
+  <!-- Your content -->
+</body>
+```
+
+#### Dark Theme (Default)
+The default theme with rich glassmorphism effects:
+- Deep backgrounds
+- Vibrant glass effects
+- Strong blur and transparency
+
+```html
+<body data-theme="dark">
+  <!-- Your content -->
+</body>
+```
+
+#### High Contrast Theme
+Designed for accessibility and readability:
+- Maximum contrast ratios
+- Reduced transparency
+- Stronger borders
+- Minimal blur effects
+
+```html
+<body data-theme="high-contrast">
+  <!-- Your content -->
+</body>
+```
+
+## Applying Themes
+
+### Global Theme
+Set the theme at the document level:
+
+```javascript
+// Set theme programmatically
+document.documentElement.setAttribute('data-theme', 'dark');
+
+// Or on body element
+document.body.setAttribute('data-theme', 'light');
+```
+
+### Component-Level Theming
+Apply themes to specific sections:
+
+```html
+<div data-theme="dark">
+  <glz-card variant="glass">
+    This card uses dark theme
+  </glz-card>
+</div>
+
+<div data-theme="light">
+  <glz-card variant="glass">
+    This card uses light theme
+  </glz-card>
+</div>
+```
+
+## Accessibility Features
+
+### Reduced Transparency
+
+For users who prefer reduced transparency (motion sickness, readability):
+
+```html
+<!-- Apply globally -->
+<body data-reduced-transparency="true">
+  <!-- All glass effects will have reduced transparency -->
+</body>
+
+<!-- Apply to specific components -->
+<glz-card variant="glass" data-reduced-transparency="true">
+  This card has reduced transparency
+</glz-card>
+```
+
+### Detecting User Preferences
+
+Respect system preferences automatically:
+
+```javascript
+// Check for reduced transparency preference
+const prefersReducedTransparency = 
+  window.matchMedia('(prefers-reduced-transparency: reduce)').matches;
+
+if (prefersReducedTransparency) {
+  document.body.setAttribute('data-reduced-transparency', 'true');
+}
+
+// Check for color scheme preference
+const prefersDark = 
+  window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+```
+
+### Reduced Motion
+
+Glaze automatically respects `prefers-reduced-motion`:
+
+```css
+/* Animations are automatically disabled when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+## Custom Themes
+
+### Creating a Custom Theme
+
+Define your own theme by overriding CSS custom properties:
+
+```css
+[data-theme="custom"] {
+  /* Color Palette */
+  --glz-palette-primary-1: #your-color;
+  --glz-palette-primary-9: #your-color;
+  
+  /* Glass Effects */
+  --glz-glass-tint-light: rgba(255, 255, 255, 0.2);
+  --glz-glass-tint-dark: rgba(0, 0, 0, 0.3);
+  --glz-glass-blur: 16px;
+  --glz-glass-border: rgba(255, 255, 255, 0.3);
+  
+  /* Shadows */
+  --glz-elevation-1: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --glz-elevation-glass: 
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 8px 32px rgba(0, 0, 0, 0.3);
+}
+```
+
+### Dynamic Theme Switching
+
+Implement a theme switcher:
+
+```javascript
+class ThemeSwitcher {
+  constructor() {
+    this.themes = ['light', 'dark', 'high-contrast'];
+    this.currentTheme = this.detectTheme();
+  }
+  
+  detectTheme() {
+    // Check localStorage
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored;
+    
+    // Check system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  }
+  
+  setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    this.currentTheme = theme;
+  }
+  
+  toggle() {
+    const currentIndex = this.themes.indexOf(this.currentTheme);
+    const nextIndex = (currentIndex + 1) % this.themes.length;
+    this.setTheme(this.themes[nextIndex]);
+  }
+}
+
+// Usage
+const switcher = new ThemeSwitcher();
+switcher.setTheme('dark');
+```
+
+## CSS Custom Properties
+
+### Core Token Structure
+
+All theme tokens follow a consistent naming pattern:
+
+```css
+/* Color tokens */
+--glz-color-{semantic}-{scale}
+--glz-palette-{color}-{scale}
+
+/* Effect tokens */
+--glz-glass-{property}
+--glz-elevation-{level}
+
+/* Layout tokens */
+--glz-spacing-{size}
+--glz-radius-{size}
+```
+
+### Overriding Tokens
+
+Override specific tokens for fine control:
+
+```css
+.custom-component {
+  /* Override glass blur for this component */
+  --glz-glass-blur: 24px;
+  
+  /* Override primary color */
+  --glz-color-primary-9: #FF6B6B;
+}
+```
+
+## Theme Context in Frameworks
+
+### React Context
+
+```jsx
+import { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext();
+
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('dark');
+  
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+  };
+  
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export const useTheme = () => useContext(ThemeContext);
+```
+
+### Vue Composition API
+
+```javascript
+import { ref, provide, inject } from 'vue';
+
+const ThemeSymbol = Symbol('theme');
+
+export function provideTheme() {
+  const theme = ref('dark');
+  
+  const setTheme = (newTheme) => {
+    theme.value = newTheme;
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
+  
+  provide(ThemeSymbol, { theme, setTheme });
+  
+  return { theme, setTheme };
+}
+
+export function useTheme() {
+  return inject(ThemeSymbol);
+}
+```
+
+## Best Practices
+
+### 1. Respect User Preferences
+Always check and respect system preferences on initial load.
+
+### 2. Persist Theme Choice
+Save user's theme preference to localStorage for consistency.
+
+### 3. Smooth Transitions
+Add transitions when switching themes:
+
+```css
+* {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease,
+              color 0.3s ease;
+}
+```
+
+### 4. Test All Themes
+Ensure your content is readable and accessible in all theme variants.
+
+### 5. Provide Theme Toggle
+Always give users control over their visual experience.
