@@ -26,7 +26,9 @@
       "require": "./dist/unocss.preset.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc --pretty false",
     "clean": "rm -rf dist *.tsbuildinfo",
@@ -37,8 +39,8 @@
     "@glaze/tokens": "workspace:*"
   },
   "peerDependencies": {
-    "tailwindcss": "^3.0.0",
-    "@unocss/core": "^0.58.0"
+    "@unocss/core": "^0.58.0",
+    "tailwindcss": "^3.0.0"
   },
   "peerDependenciesMeta": {
     "@unocss/core": {
@@ -46,10 +48,10 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^20.10.5",
-    "tailwindcss": "^3.4.0",
-    "typescript": "^5.3.3",
-    "vitest": "^1.1.0",
-    "postcss": "^8.4.32"
+    "@types/node": "^24.2.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   }
 }

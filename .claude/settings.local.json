@@ -10,7 +10,10 @@
       "Bash(pnpm test:*)",
       "Bash(cat:*)",
       "Bash(pnpm -w build)",
-      "Bash(pnpm -w build --filter=@glaze/components)"
+      "Bash(pnpm -w build --filter=@glaze/components)",
+      "Bash(pnpm dlx:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(pnpm update:*)"
     ],
     "deny": []
   }
