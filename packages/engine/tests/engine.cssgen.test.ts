@@ -8,7 +8,7 @@ describe('Engine CSS Generation', () => {
   let generatedCSS = '';
 
   beforeAll(async () => {
-    // Create a minimal Tailwind configuration
+    // Create a minimal Tailwind configuration for v3
     const config = {
       content: [
         {
@@ -31,7 +31,7 @@ describe('Engine CSS Generation', () => {
       plugins: [glazePlugin],
     };
 
-    // Process CSS with Tailwind
+    // Process CSS with Tailwind v3
     const input = '@tailwind base; @tailwind components; @tailwind utilities;';
     const result = await postcss([
       tailwindcss(config),
