@@ -98,5 +98,5 @@ playwright-report/
 # Turbo
 .turbo/
 
-# Changeset
-.changeset/
+# Changeset (ignore temp files but allow config and changesets)
+.changeset/.git-keep
