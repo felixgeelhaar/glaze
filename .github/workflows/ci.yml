@@ -117,6 +117,11 @@ jobs:
       - name: Install axe-core CLI
         run: npm install -g @axe-core/cli
 
+      - name: Build demo app
+        run: |
+          cd apps/demo
+          pnpm build
+
       - name: Start demo app for a11y testing
         run: |
           cd apps/demo
