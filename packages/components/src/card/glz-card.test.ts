@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-// import { axe } from 'jest-axe'; // TODO: Fix jest-axe types
+import { axe } from 'jest-axe';
 import './glz-card.js';
 import type { GlzCard } from './glz-card.js';
 
@@ -55,17 +55,16 @@ describe('glz-card', () => {
     expect(slotContent?.[1]?.tagName).toBe('P');
   });
 
-  it.skip('is accessible with no violations - TODO: Fix jest-axe types', async () => {
-    await fixture<GlzCard>(html`
+  it('is accessible with no violations', async () => {
+    const el = await fixture<GlzCard>(html`
       <glz-card>
         <h2>Accessible Card</h2>
         <p>This card should have no accessibility violations.</p>
       </glz-card>
     `);
     
-    // const el = await fixture<GlzCard>(html`...`);
-    // const results = await axe(el);
-    // expect(results).toHaveNoViolations(); // TODO: Fix jest-axe types
+    const results = await axe(el);
+    expect(results).toHaveNoViolations();
   });
 
   it('respects reduced transparency data attribute', async () => {

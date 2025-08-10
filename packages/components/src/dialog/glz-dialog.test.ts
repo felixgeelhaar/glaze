@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-// import { axe } from "jest-axe"; // TODO: Fix jest-axe types
+import { axe } from 'jest-axe';
 import './glz-dialog.js';
 import type { GlzDialog } from './glz-dialog.js';
 
@@ -170,14 +170,13 @@ describe('glz-dialog', () => {
     expect(dialog.getAttribute('aria-label')).toBe('Custom Dialog');
   });
 
-  it.skip('is accessible with no violations when closed - TODO: Fix jest-axe types', async () => {
-    await fixture<GlzDialog>(html`
+  it('is accessible with no violations when closed', async () => {
+    const el = await fixture<GlzDialog>(html`
       <glz-dialog>Accessible Dialog</glz-dialog>
     `);
     
-    // const el = await fixture<GlzDialog>(html`<glz-dialog>Accessible Dialog</glz-dialog>`);
-    // const results = await axe(el);
-    // expect(results).toHaveNoViolations(); // TODO: Fix jest-axe types
+    const results = await axe(el);
+    expect(results).toHaveNoViolations();
   });
 
   it('applies glass variant styles', async () => {

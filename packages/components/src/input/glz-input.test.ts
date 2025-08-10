@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-// import { axe } from "jest-axe"; // TODO: Fix jest-axe types
+import { axe } from 'jest-axe';
 import './glz-input.js';
 import type { GlzInput } from './glz-input.js';
 
@@ -206,14 +206,13 @@ describe('glz-input', () => {
     expect(describedBy).toContain('error');
   });
 
-  it.skip('is accessible with no violations - TODO: Fix jest-axe types', async () => {
-    await fixture<GlzInput>(html`
+  it('is accessible with no violations', async () => {
+    const el = await fixture<GlzInput>(html`
       <glz-input label="Accessible Input"></glz-input>
     `);
     
-    // const el = await fixture<GlzInput>(html`<glz-input label="Accessible Input"></glz-input>`);
-    // const results = await axe(el);
-    // expect(results).toHaveNoViolations(); // TODO: Fix jest-axe types
+    const results = await axe(el);
+    expect(results).toHaveNoViolations();
   });
 
   it('handles icon slots', async () => {

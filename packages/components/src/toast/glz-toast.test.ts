@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-// import { axe } from "jest-axe"; // TODO: Fix jest-axe types
+import { axe } from 'jest-axe';
 import './glz-toast.js';
 import type { GlzToast } from './glz-toast.js';
 
@@ -215,8 +215,11 @@ describe('glz-toast', () => {
     expect(toast?.getAttribute('aria-live')).toBe('polite');
   });
 
-  it.skip('is accessible with no violations - TODO: Fix jest-axe types', async () => {
-    await fixture<GlzToast>(html`
+  it('is accessible with no violations', async () => {
+    // Use real timers for this test to avoid animation issues
+    vi.useRealTimers();
+    
+    const el = await fixture<GlzToast>(html`
       <glz-toast 
         title="Accessible Toast"
         message="This toast is accessible"
@@ -224,8 +227,13 @@ describe('glz-toast', () => {
       ></glz-toast>
     `);
     
-    // const el = await fixture<GlzToast>(html`...`);
-    // const results = await axe(el);
-    // expect(results).toHaveNoViolations(); // TODO: Fix jest-axe types
+    // Wait for the component to be fully rendered
+    await el.updateComplete;
+    
+    const results = await axe(el);
+    expect(results).toHaveNoViolations();
+    
+    // Restore fake timers for other tests
+    vi.useFakeTimers();
   });
 });

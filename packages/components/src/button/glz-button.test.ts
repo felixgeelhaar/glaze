@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-// import { axe } from 'jest-axe'; // TODO: Fix jest-axe types
+import { axe } from 'jest-axe';
 import './glz-button.js';
 import type { GlzButton } from './glz-button.js';
 
@@ -95,14 +95,13 @@ describe('glz-button', () => {
     expect(button?.getAttribute('aria-busy')).toBe('true');
   });
 
-  it.skip('is accessible with no violations - TODO: Fix jest-axe types', async () => {
-    await fixture<GlzButton>(html`
+  it('is accessible with no violations', async () => {
+    const el = await fixture<GlzButton>(html`
       <glz-button>Accessible Button</glz-button>
     `);
     
-    // const el = await fixture<GlzButton>(html`<glz-button>Accessible Button</glz-button>`);
-    // const results = await axe(el);
-    // expect(results).toHaveNoViolations(); // TODO: Fix jest-axe types
+    const results = await axe(el);
+    expect(results).toHaveNoViolations();
   });
 
   it('maintains focus visibility', async () => {

@@ -600,6 +600,7 @@ export class GlzSelect extends LitElement {
           class="dropdown"
           role="listbox"
           aria-multiselectable="${this.multiple}"
+          aria-label="${this.label || this.placeholder}"
           part="dropdown"
         >
           ${this.options.map((option, index) => {

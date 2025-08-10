@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-// import { axe } from "jest-axe"; // TODO: Fix jest-axe types
+import { axe } from 'jest-axe';
 import './glz-select.js';
 import type { GlzSelect } from './glz-select.js';
 
@@ -243,13 +243,12 @@ describe('glz-select', () => {
     expect(dropdown?.getAttribute('role')).toBe('listbox');
   });
 
-  it.skip('is accessible with no violations - TODO: Fix jest-axe types', async () => {
-    await fixture<GlzSelect>(html`
+  it('is accessible with no violations', async () => {
+    const el = await fixture<GlzSelect>(html`
       <glz-select label="Accessible Select" .options="${mockOptions}"></glz-select>
     `);
     
-    // const el = await fixture<GlzSelect>(html`<glz-select label="Accessible Select" .options="${mockOptions}"></glz-select>`);
-    // const results = await axe(el);
-    // expect(results).toHaveNoViolations(); // TODO: Fix jest-axe types
+    const results = await axe(el);
+    expect(results).toHaveNoViolations();
   });
 });

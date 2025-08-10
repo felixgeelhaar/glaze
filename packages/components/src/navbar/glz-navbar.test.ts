@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-// import { axe } from "jest-axe"; // TODO: Fix jest-axe types
+import { axe } from 'jest-axe';
 import './glz-navbar.js';
 import type { GlzNavbar } from './glz-navbar.js';
 
@@ -219,8 +219,8 @@ describe('glz-navbar', () => {
     }
   });
 
-  it.skip('is accessible with no violations - TODO: Fix jest-axe types', async () => {
-    await fixture<GlzNavbar>(html`
+  it('is accessible with no violations', async () => {
+    const el = await fixture<GlzNavbar>(html`
       <glz-navbar brand="Accessible Nav">
         <a slot="nav-links" href="/home">Home</a>
         <a slot="nav-links" href="/about">About</a>
@@ -228,8 +228,7 @@ describe('glz-navbar', () => {
       </glz-navbar>
     `);
     
-    // const el = await fixture<GlzNavbar>(html`...`);
-    // const results = await axe(el);
-    // expect(results).toHaveNoViolations(); // TODO: Fix jest-axe types
+    const results = await axe(el);
+    expect(results).toHaveNoViolations();
   });
 });

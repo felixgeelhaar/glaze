@@ -1,15 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type { AxeResults } from 'jest-axe';
+// Vitest custom matchers for jest-axe
+/// <reference types="vitest" />
 
-declare global {
-  namespace Vi {
-    interface Assertion {
-      toHaveNoViolations(): void;
-    }
-    interface AsymmetricMatchersContaining {
-      toHaveNoViolations(): void;
-    }
+declare module 'vitest' {
+  interface Assertion<T = unknown> {
+    toHaveNoViolations(): T;
+  }
+  interface AsymmetricMatchersContaining {
+    toHaveNoViolations(): unknown;
   }
 }
-
-export {};

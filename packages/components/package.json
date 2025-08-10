@@ -67,6 +67,7 @@
     "@web/dev-server-esbuild": "1.0.4",
     "@web/test-runner": "^0.20.2",
     "@web/test-runner-playwright": "^0.11.1",
+    "axe-core": "4.10.3",
     "bundlesize": "^0.18.2",
     "eslint": "^9.33.0",
     "happy-dom": "18.0.1",
