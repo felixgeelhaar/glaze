@@ -331,7 +331,7 @@ export const BlogPosts: Story = {
           <article style="padding: 2rem 0; border-bottom: 1px solid var(--color-glass-border);">
             <h2 style="margin: 0 0 0.5rem;">Blog Post Title ${i + 1}</h2>
             <p style="color: var(--color-bg-on); opacity: 0.7; margin: 0 0 1rem;">
-              Published on January ${15 + i}, 2024 • 5 min read
+              Published on January ${15 + i}, 2025 • 5 min read
             </p>
             <p style="margin: 0;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...

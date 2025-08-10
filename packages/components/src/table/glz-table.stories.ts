@@ -350,7 +350,7 @@ export const LargeDataset: Story = {
       department: ['Engineering', 'Sales', 'Marketing', 'HR'][i % 4],
       position: ['Manager', 'Developer', 'Designer', 'Analyst'][i % 4],
       salary: `$${(50000 + i * 1000).toLocaleString()}`,
-      startDate: `2024-0${(i % 9) + 1}-${String((i % 28) + 1).padStart(2, '0')}`,
+      startDate: `2025-0${(i % 9) + 1}-${String((i % 28) + 1).padStart(2, '0')}`,
       status: i % 3 === 0 ? 'Inactive' : 'Active'
     }));
 
@@ -582,12 +582,12 @@ export const TransactionTable: Story = {
     ];
 
     const transactionData = [
-      { id: 'TXN001', date: '2024-01-15', description: 'Payment from Client A', amount: 2500.00, status: 'completed' },
-      { id: 'TXN002', date: '2024-01-14', description: 'Software License', amount: -99.99, status: 'completed' },
-      { id: 'TXN003', date: '2024-01-14', description: 'Refund - Order #123', amount: 45.50, status: 'pending' },
-      { id: 'TXN004', date: '2024-01-13', description: 'Monthly Subscription', amount: -29.99, status: 'completed' },
-      { id: 'TXN005', date: '2024-01-13', description: 'Payment from Client B', amount: 1750.00, status: 'completed' },
-      { id: 'TXN006', date: '2024-01-12', description: 'Failed Transfer', amount: -500.00, status: 'failed' }
+      { id: 'TXN001', date: '2025-01-15', description: 'Payment from Client A', amount: 2500.00, status: 'completed' },
+      { id: 'TXN002', date: '2025-01-14', description: 'Software License', amount: -99.99, status: 'completed' },
+      { id: 'TXN003', date: '2025-01-14', description: 'Refund - Order #123', amount: 45.50, status: 'pending' },
+      { id: 'TXN004', date: '2025-01-13', description: 'Monthly Subscription', amount: -29.99, status: 'completed' },
+      { id: 'TXN005', date: '2025-01-13', description: 'Payment from Client B', amount: 1750.00, status: 'completed' },
+      { id: 'TXN006', date: '2025-01-12', description: 'Failed Transfer', amount: -500.00, status: 'failed' }
     ];
 
     return html`

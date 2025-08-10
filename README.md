@@ -317,7 +317,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 📄 License
 
-MIT © 2024 Glaze Design System
+MIT © 2025 Glaze Design System
 
 ## 🙏 Acknowledgments
 
@@ -331,7 +331,6 @@ Built with:
 
 - [Documentation](https://glaze-design-system.vercel.app)
 - [GitHub Issues](https://github.com/glaze-design-system/glaze/issues)
-- [Discord Community](https://discord.gg/glaze)
 
 ---
 

@@ -365,7 +365,7 @@ export const AllComponents: Story = {
 
         <!-- Footer -->
         <div style="text-align: center; color: white; margin-top: 3rem; padding: 2rem 0;">
-          <p style="opacity: 0.9;">© 2024 Glaze Design System • Built with Lit Web Components</p>
+          <p style="opacity: 0.9;">© 2025 Glaze Design System • Built with Lit Web Components</p>
           <p style="opacity: 0.7; font-size: 0.875rem; margin-top: 0.5rem;">
             20 Components • WCAG 2.2 AA+ Compliant • <50KB Gzipped
           </p>

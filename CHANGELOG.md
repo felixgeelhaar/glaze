@@ -2,7 +2,7 @@
 
 All notable changes to the Glaze Design System will be documented in this file.
 
-## [1.0.0] - 2024-01-15
+## [1.0.0] - 2025-01-15
 
 ### 🎉 Initial Release
 
