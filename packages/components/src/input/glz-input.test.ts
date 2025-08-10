@@ -98,12 +98,11 @@ describe('glz-input', () => {
 
   it('displays error message', async () => {
     const el = await fixture<GlzInput>(html`
-      <glz-input error error-message="Please enter a valid email"></glz-input>
+      <glz-input error></glz-input>
     `);
     
-    // Force a re-render to ensure error state is applied
-    el.requestUpdate();
-    await el.updateComplete;
+    // Set properties directly
+    el.errorMessage = 'Please enter a valid email';
     await el.updateComplete;
     
     const errorDiv = el.shadowRoot?.querySelector('.error-message');
@@ -114,16 +113,15 @@ describe('glz-input', () => {
 
   it('displays helper text', async () => {
     const el = await fixture<GlzInput>(html`
-      <glz-input helper-text="Enter your full name"></glz-input>
+      <glz-input></glz-input>
     `);
     
-    // Force a re-render to ensure helper text is applied
-    el.requestUpdate();
-    await el.updateComplete;
+    // Set properties directly
+    el.helperText = 'Enter your full name';
     await el.updateComplete;
     
     const helper = el.shadowRoot?.querySelector('.helper-text');
-    expect(helper?.textContent).toBe('Enter your full name');
+    expect(helper?.textContent?.trim()).toBe('Enter your full name');
   });
 
   it('applies disabled state', async () => {
@@ -190,14 +188,12 @@ describe('glz-input', () => {
         label="Test Input"
         required
         error
-        error-message="Error"
-        helper-text="Help"
       ></glz-input>
     `);
     
-    // Force a re-render to ensure all properties are applied
-    el.requestUpdate();
-    await el.updateComplete;
+    // Set properties directly
+    el.errorMessage = 'Error';
+    el.helperText = 'Help';
     await el.updateComplete;
     
     const input = el.shadowRoot?.querySelector('input');

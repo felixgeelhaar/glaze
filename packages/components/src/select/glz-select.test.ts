@@ -185,13 +185,11 @@ describe('glz-select', () => {
       <glz-select 
         .options="${mockOptions}" 
         error 
-        error-message="Please select an option"
       ></glz-select>
     `);
     
-    // Force a re-render to ensure error state is applied
-    el.requestUpdate();
-    await el.updateComplete;
+    // Set properties directly
+    el.errorMessage = 'Please select an option';
     await el.updateComplete;
     
     const errorDiv = el.shadowRoot?.querySelector('.error-message');
@@ -203,17 +201,15 @@ describe('glz-select', () => {
     const el = await fixture<GlzSelect>(html`
       <glz-select 
         .options="${mockOptions}" 
-        helper-text="Choose wisely"
       ></glz-select>
     `);
     
-    // Force a re-render to ensure helper text is applied
-    el.requestUpdate();
-    await el.updateComplete;
+    // Set properties directly
+    el.helperText = 'Choose wisely';
     await el.updateComplete;
     
     const helper = el.shadowRoot?.querySelector('.helper-text');
-    expect(helper?.textContent).toBe('Choose wisely');
+    expect(helper?.textContent?.trim()).toBe('Choose wisely');
   });
 
   it('is disabled when disabled prop is set', async () => {

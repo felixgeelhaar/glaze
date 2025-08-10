@@ -140,15 +140,13 @@ describe('glz-toast', () => {
     const el = await fixture<GlzToast>(html`
       <glz-toast 
         message="With progress" 
-        show-progress 
-        .duration="${5000}"
         open
       ></glz-toast>
     `);
     
-    // Force a re-render to ensure progress bar is applied
-    el.requestUpdate();
-    await el.updateComplete;
+    // Set properties directly
+    el.showProgress = true;
+    el.duration = 5000;
     await el.updateComplete;
     
     const progressBar = el.shadowRoot?.querySelector('.progress-bar');

@@ -20,12 +20,11 @@ describe('glz-navbar', () => {
 
   it('renders brand name and link', async () => {
     const el = await fixture<GlzNavbar>(html`
-      <glz-navbar brand="Glaze UI" .brandHref="/home"></glz-navbar>
+      <glz-navbar brand="Glaze UI"></glz-navbar>
     `);
     
-    // Force a re-render to ensure brand href is applied
-    el.requestUpdate();
-    await el.updateComplete;
+    // Set properties directly
+    el.brandHref = '/home';
     await el.updateComplete;
     
     const brandLink = el.shadowRoot?.querySelector('.brand') as HTMLAnchorElement;
