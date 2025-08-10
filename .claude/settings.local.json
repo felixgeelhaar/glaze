@@ -13,7 +13,9 @@
       "Bash(pnpm -w build --filter=@glaze/components)",
       "Bash(pnpm dlx:*)",
       "Bash(pnpm dev:*)",
-      "Bash(pnpm update:*)"
+      "Bash(pnpm update:*)",
+      "mcp__github__get_job_logs",
+      "mcp__github__list_workflow_runs"
     ],
     "deny": []
   }
