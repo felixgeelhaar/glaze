@@ -4,7 +4,7 @@ import plugin from 'tailwindcss/plugin';
  * Glaze Glass Morphism Plugin
  * Provides glass utilities and component shortcuts
  */
-export const glazePlugin = plugin(
+export const glazePlugin: any = plugin(
   function ({ addUtilities, addComponents }) {
     // Glass utilities
     const glassUtilities = {
