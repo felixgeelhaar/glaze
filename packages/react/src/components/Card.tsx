@@ -1,12 +1,12 @@
-import { forwardRef } from 'react';
+import { forwardRef, createElement } from 'react';
 import type { CardProps, GlzCardElement } from '../types.js';
 
 export const Card = forwardRef<GlzCardElement, CardProps>(
   ({ children, ...props }, ref) => {
-    return (
-      <glz-card ref={ref} {...props}>
-        {children}
-      </glz-card>
+    return createElement(
+      'glz-card',
+      { ref, ...props },
+      children
     );
   }
 );

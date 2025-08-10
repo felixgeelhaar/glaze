@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, type RefObject } from 'react';
+import { forwardRef, createElement, useEffect, useRef, type RefObject } from 'react';
 import type { ButtonProps, GlzButtonElement } from '../types.js';
 
 export const Button = forwardRef<GlzButtonElement, ButtonProps>(
@@ -20,13 +20,10 @@ export const Button = forwardRef<GlzButtonElement, ButtonProps>(
       };
     }, [onClick, ref]);
     
-    return (
-      <glz-button 
-        ref={ref}
-        {...props as any}
-      >
-        {children}
-      </glz-button>
+    return createElement(
+      'glz-button',
+      { ref, ...props as any },
+      children
     );
   }
 );

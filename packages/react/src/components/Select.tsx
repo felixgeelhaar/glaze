@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, type RefObject } from 'react';
+import { forwardRef, createElement, useEffect, useRef, type RefObject } from 'react';
 import type { SelectProps, GlzSelectElement } from '../types.js';
 import { createEventHandler } from '../utils.js';
 
@@ -36,11 +36,9 @@ export const Select = forwardRef<GlzSelectElement, SelectProps>(
       'error-message': errorMessage,
     };
     
-    return (
-      <glz-select 
-        ref={ref}
-        {...webComponentProps}
-      />
+    return createElement(
+      'glz-select',
+      { ref, ...webComponentProps }
     );
   }
 );

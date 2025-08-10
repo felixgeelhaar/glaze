@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, type RefObject } from 'react';
+import { forwardRef, createElement, useEffect, useRef, type RefObject } from 'react';
 import type { InputProps, GlzInputElement } from '../types.js';
 import { createEventHandler } from '../utils.js';
 
@@ -39,11 +39,9 @@ export const Input = forwardRef<GlzInputElement, InputProps>(
       'error-message': errorMessage,
     };
     
-    return (
-      <glz-input 
-        ref={ref}
-        {...webComponentProps as any}
-      />
+    return createElement(
+      'glz-input',
+      { ref, ...webComponentProps as any }
     );
   }
 );

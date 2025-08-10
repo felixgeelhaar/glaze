@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useImperativeHandle } from 'react';
+import { forwardRef, createElement, useEffect, useRef, useImperativeHandle } from 'react';
 import type { ToastProps, GlzToastElement } from '../types.js';
 import { createEventHandler } from '../utils.js';
 
@@ -37,11 +37,9 @@ export const Toast = forwardRef<GlzToastElement, ToastProps>(
       'show-progress': showProgress,
     };
     
-    return (
-      <glz-toast 
-        ref={innerRef}
-        {...webComponentProps}
-      />
+    return createElement(
+      'glz-toast',
+      { ref: innerRef, ...webComponentProps }
     );
   }
 );

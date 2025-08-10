@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useImperativeHandle } from 'react';
+import { forwardRef, createElement, useEffect, useRef, useImperativeHandle } from 'react';
 import type { DialogProps, GlzDialogElement } from '../types.js';
 import { createEventHandler } from '../utils.js';
 
@@ -31,13 +31,10 @@ export const Dialog = forwardRef<GlzDialogElement, DialogProps>(
       };
     }, [onGlzDialogClose]);
     
-    return (
-      <glz-dialog 
-        ref={innerRef}
-        {...props}
-      >
-        {children}
-      </glz-dialog>
+    return createElement(
+      'glz-dialog',
+      { ref: innerRef, ...props },
+      children
     );
   }
 );

@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, type RefObject } from 'react';
+import { forwardRef, createElement, useEffect, useRef, type RefObject } from 'react';
 import type { NavbarProps, GlzNavbarElement } from '../types.js';
 import { createEventHandler } from '../utils.js';
 
@@ -25,13 +25,10 @@ export const Navbar = forwardRef<GlzNavbarElement, NavbarProps>(
       'brand-href': brandHref,
     };
     
-    return (
-      <glz-navbar 
-        ref={ref}
-        {...webComponentProps}
-      >
-        {children}
-      </glz-navbar>
+    return createElement(
+      'glz-navbar',
+      { ref, ...webComponentProps },
+      children
     );
   }
 );
