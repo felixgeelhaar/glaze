@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/web-components';
-import '@glaze/components/styles/tokens.css';
-import '@glaze/components/styles/components.css';
+import '@glaze/components/dist/styles/tokens.css';
+import '@glaze/components/dist/styles/components.css';
 
 // Register all components
 import '@glaze/components';

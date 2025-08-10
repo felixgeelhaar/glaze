@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Card, Dialog, Button } from '@glaze/react';
-import '@glaze/components/styles/tokens.css';
-import '@glaze/components/styles/components.css';
+import '@glaze/components/dist/styles/tokens.css';
+import '@glaze/components/dist/styles/components.css';
 
 export function ReactPage() {
   const [dialogOpen, setDialogOpen] = useState(false);

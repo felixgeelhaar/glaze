@@ -1,6 +1,6 @@
 /* Import Glaze tokens and components */
-@import '@glaze/components/styles/tokens.css';
-@import '@glaze/components/styles/components.css';
+@import '@glaze/components/dist/styles/tokens.css';
+@import '@glaze/components/dist/styles/components.css';
 
 /* Additional app styles */
 .container {
