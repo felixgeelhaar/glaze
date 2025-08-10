@@ -24,8 +24,8 @@
   "scripts": {
     "build": "tsc --pretty false && cp -r src/styles dist/",
     "dev": "tsc --watch",
-    "test": "wtr",
-    "test:watch": "wtr --watch",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "size": "bundlesize",
@@ -59,14 +59,21 @@
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.10.4",
     "@open-wc/testing": "^4.0.0",
+    "@testing-library/jest-dom": "6.6.4",
     "@types/node": "^24.2.1",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
     "@typescript-eslint/parser": "^8.39.0",
+    "@vitest/ui": "3.2.4",
+    "@web/dev-server-esbuild": "1.0.4",
     "@web/test-runner": "^0.20.2",
     "@web/test-runner-playwright": "^0.11.1",
     "bundlesize": "^0.18.2",
     "eslint": "^9.33.0",
-    "typescript": "^5.9.2"
+    "happy-dom": "18.0.1",
+    "jest-axe": "10.0.0",
+    "jsdom": "26.1.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   },
   "customElements": "dist/custom-elements.json",
   "bundlesize": [
