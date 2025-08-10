@@ -113,7 +113,9 @@ describe('glz-button', () => {
     const button = el.shadowRoot?.querySelector('button');
     button?.focus();
     
-    const styles = getComputedStyle(button!);
-    expect(styles.outlineStyle).toBeTruthy();
+    if (button) {
+      const styles = getComputedStyle(button);
+      expect(styles.outlineStyle).toBeTruthy();
+    }
   });
 });

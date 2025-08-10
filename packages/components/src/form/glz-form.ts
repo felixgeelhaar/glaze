@@ -253,7 +253,7 @@ export class GlzForm extends LitElement {
         } else {
           this._handleError('Submission failed. Please try again.');
         }
-      } catch (error) {
+      } catch {
         this._handleError('Network error. Please check your connection.');
       }
     } else if (!this.preventSubmit) {

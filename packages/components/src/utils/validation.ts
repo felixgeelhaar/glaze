@@ -22,7 +22,10 @@ export class FormValidator {
     if (!this.rules.has(fieldName)) {
       this.rules.set(fieldName, []);
     }
-    this.rules.get(fieldName)!.push(rule);
+    const fieldRules = this.rules.get(fieldName);
+    if (fieldRules) {
+      fieldRules.push(rule);
+    }
   }
   
   /**
@@ -164,7 +167,7 @@ export const ValidationRules = {
     validator: (value: string) => {
       if (!value) return true; // Skip if empty
       // Basic phone validation (10-15 digits, optional + and spaces/dashes)
-      const phoneRegex = /^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,4}[-\s\.]?[0-9]{1,5}$/;
+      const phoneRegex = /^[+]?[(]?[0-9]{1,3}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,4}[-\s.]?[0-9]{1,5}$/;
       return phoneRegex.test(value.replace(/\s/g, ''));
     },
     message

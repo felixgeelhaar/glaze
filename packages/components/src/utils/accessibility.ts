@@ -238,7 +238,7 @@ export class LiveAnnouncer {
     if (!LiveAnnouncer.instance) {
       LiveAnnouncer.instance = new LiveAnnouncer();
     }
-    return LiveAnnouncer.instance!;
+    return LiveAnnouncer.instance;
   }
   
   announce(message: string, priority: 'polite' | 'assertive' = 'polite') {

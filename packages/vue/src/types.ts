@@ -31,11 +31,11 @@ export interface SelectOption {
 
 // Event types
 export interface GlzDialogCloseEvent extends CustomEvent {
-  detail: void;
+  detail: undefined;
 }
 
 export interface GlzToastCloseEvent extends CustomEvent {
-  detail: void;
+  detail: undefined;
 }
 
 export interface GlzNavbarToggleEvent extends CustomEvent {
