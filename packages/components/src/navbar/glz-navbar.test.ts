@@ -26,7 +26,7 @@ describe('glz-navbar', () => {
     const brandLink = el.shadowRoot?.querySelector('.brand') as HTMLAnchorElement;
     expect(brandLink).toBeTruthy();
     expect(brandLink.textContent?.trim()).toContain('Glaze UI');
-    expect(brandLink.href).toContain('/home');
+    expect(brandLink.pathname).toBe('/home');
   });
 
   it('renders slotted content', async () => {

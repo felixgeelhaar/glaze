@@ -116,7 +116,7 @@ describe('glz-toast', () => {
 
   it('does not show close button when not closable', async () => {
     const el = await fixture<GlzToast>(html`
-      <glz-toast message="Not closable" closable="false" open></glz-toast>
+      <glz-toast message="Not closable" .closable="${false}" open></glz-toast>
     `);
     
     const closeBtn = el.shadowRoot?.querySelector('.close-button');
@@ -141,7 +141,7 @@ describe('glz-toast', () => {
       <glz-toast 
         message="With progress" 
         show-progress 
-        duration="5000"
+        .duration="${5000}"
         open
       ></glz-toast>
     `);

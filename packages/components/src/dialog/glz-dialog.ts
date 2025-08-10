@@ -208,6 +208,9 @@ export class GlzDialog extends LitElement {
       }
     });
 
+    // Add keyboard event listener
+    document.addEventListener('keydown', this._handleKeyDown);
+    
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
     

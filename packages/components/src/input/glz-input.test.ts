@@ -101,6 +101,8 @@ describe('glz-input', () => {
       <glz-input error error-message="Please enter a valid email"></glz-input>
     `);
     
+    await el.updateComplete;
+    
     const errorDiv = el.shadowRoot?.querySelector('.error-message');
     expect(errorDiv).toBeTruthy();
     expect(errorDiv?.textContent?.trim()).toContain('Please enter a valid email');
@@ -111,6 +113,8 @@ describe('glz-input', () => {
     const el = await fixture<GlzInput>(html`
       <glz-input helper-text="Enter your full name"></glz-input>
     `);
+    
+    await el.updateComplete;
     
     const helper = el.shadowRoot?.querySelector('.helper-text');
     expect(helper?.textContent).toBe('Enter your full name');
@@ -185,11 +189,16 @@ describe('glz-input', () => {
       ></glz-input>
     `);
     
+    await el.updateComplete;
+    
     const input = el.shadowRoot?.querySelector('input');
     expect(input?.getAttribute('aria-label')).toBe('Test Input');
     expect(input?.getAttribute('aria-required')).toBe('true');
     expect(input?.getAttribute('aria-invalid')).toBe('true');
-    expect(input?.getAttribute('aria-describedby')).toContain('error');
+    
+    const describedBy = input?.getAttribute('aria-describedby');
+    expect(describedBy).toBeTruthy();
+    expect(describedBy).toContain('error');
   });
 
   it.skip('is accessible with no violations - TODO: Fix jest-axe types', async () => {

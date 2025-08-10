@@ -55,6 +55,8 @@ describe('glz-dialog', () => {
     
     el.show();
     await el.updateComplete;
+    // Wait a frame for event listener to be attached
+    await new Promise(resolve => setTimeout(resolve, 0));
     
     const event = new KeyboardEvent('keydown', { key: 'Escape' });
     document.dispatchEvent(event);

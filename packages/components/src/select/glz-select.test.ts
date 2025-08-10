@@ -189,6 +189,8 @@ describe('glz-select', () => {
       ></glz-select>
     `);
     
+    await el.updateComplete;
+    
     const errorDiv = el.shadowRoot?.querySelector('.error-message');
     expect(errorDiv).toBeTruthy();
     expect(errorDiv?.textContent?.trim()).toContain('Please select an option');
@@ -201,6 +203,8 @@ describe('glz-select', () => {
         helper-text="Choose wisely"
       ></glz-select>
     `);
+    
+    await el.updateComplete;
     
     const helper = el.shadowRoot?.querySelector('.helper-text');
     expect(helper?.textContent).toBe('Choose wisely');
