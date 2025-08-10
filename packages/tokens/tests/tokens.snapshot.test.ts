@@ -6,7 +6,7 @@ import { execSync } from 'child_process';
 describe('Token Build Outputs', () => {
   const distPath = join(process.cwd(), 'dist');
   const cssPath = join(distPath, 'css', 'tokens.css');
-  const tsPath = join(distPath, 'ts', 'index.ts');
+  const tsPath = join(distPath, 'ts', 'index.js');
   const figmaPath = join(distPath, 'figma', 'tokens.json');
 
   beforeAll(() => {
@@ -37,7 +37,7 @@ describe('Token Build Outputs', () => {
     expect(cssContent).toContain('[data-theme="high-contrast"]');
   });
 
-  it('should generate TypeScript definitions', () => {
+  it('should generate JavaScript module', () => {
     expect(existsSync(tsPath)).toBe(true);
     const tsContent = readFileSync(tsPath, 'utf-8');
     
