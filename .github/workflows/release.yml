@@ -26,13 +26,13 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
           run_install: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
 
@@ -90,13 +90,13 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
           run_install: false
 
       - name: Setup Node.js for GitHub Packages
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@glaze'
