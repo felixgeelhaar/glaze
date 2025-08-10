@@ -82,7 +82,7 @@ jobs:
           kill $SERVER_PID || true
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: playwright-report-${{ matrix.node-version }}
@@ -155,7 +155,7 @@ jobs:
 
       - name: Upload accessibility reports
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: accessibility-reports
           path: accessibility-reports/
