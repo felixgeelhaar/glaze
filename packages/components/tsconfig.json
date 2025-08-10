@@ -7,7 +7,15 @@
     "importHelpers": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.stories.ts",
+    "src/types/vitest.d.ts",
+    "test/**/*"
+  ],
   "references": [
     { "path": "../tokens" },
     { "path": "../engine" }
