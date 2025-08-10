@@ -3,6 +3,8 @@
 A modern, accessible design system built with Web Components and Lit, featuring beautiful glassmorphism aesthetics.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-109%2F109%20passing-success)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Bundle Size](https://img.shields.io/badge/size-%3C50KB-brightgreen)
 ![Accessibility](https://img.shields.io/badge/WCAG-2.2%20AA%2B-success)
