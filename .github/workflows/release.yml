@@ -122,8 +122,8 @@ jobs:
           
           for pkg in packages/*/package.json; do
             if [ -f "$pkg" ]; then
-              PKG_NAME=$(node -p "require('$pkg').name")
-              PKG_VERSION=$(node -p "require('$pkg').version")
+              PKG_NAME=$(cat "$pkg" | jq -r '.name')
+              PKG_VERSION=$(cat "$pkg" | jq -r '.version')
               echo "  - $PKG_NAME@$PKG_VERSION"
             fi
           done
