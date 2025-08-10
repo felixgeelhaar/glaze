@@ -14,16 +14,16 @@ test.describe('Glaze Demo App', () => {
   });
 
   test('should navigate to React demo', async ({ page }) => {
-    await page.click('a[href="#react"]');
+    await page.click('nav a[href="#react"]');
     await expect(page.locator('h2').first()).toContainText('React Components');
   });
 
   test('should navigate to Vue demo', async ({ page }) => {
-    await page.click('a[href="#vue"]');
+    await page.click('nav a[href="#vue"]');
     // Check that URL updated to Vue section
     expect(page.url()).toContain('#vue');
     // Check that Vue navigation link is active
-    await expect(page.locator('a[href="#vue"]')).toHaveClass(/bg-white/);
+    await expect(page.locator('nav a[href="#vue"]')).toHaveClass(/bg-white/);
   });
 
   test('should have accessible navigation', async ({ page }) => {
@@ -37,7 +37,7 @@ test.describe('Glaze Demo App', () => {
   });
 
   test('glassmorphism effects should be visible', async ({ page }) => {
-    await page.click('a[href="#react"]');
+    await page.click('nav a[href="#react"]');
     
     // Wait for React components to render
     await page.waitForSelector('glz-card', { timeout: 5000 });
@@ -66,7 +66,7 @@ test.describe('Accessibility', () => {
 
   test('should have proper ARIA labels', async ({ page }) => {
     await page.goto('/');
-    await page.click('a[href="#react"]');
+    await page.click('nav a[href="#react"]');
     
     // Wait for components to load
     await page.waitForSelector('glz-button', { timeout: 5000 });
