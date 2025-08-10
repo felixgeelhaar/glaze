@@ -10,7 +10,7 @@
     "clean": "rm -rf dist",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "echo \"No tests yet\"",
-    "test:e2e": "playwright test",
+    "test:e2e": "cd ../.. && playwright test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
