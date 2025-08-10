@@ -66,11 +66,14 @@ jobs:
       - name: Run accessibility tests on Storybook
         run: |
           cd packages/docs
-          npx wait-on http://localhost:6006 -t 30000 &
+          # Start Storybook in background
           pnpm storybook --port 6006 --quiet &
           SERVER_PID=$!
-          sleep 10
+          # Wait for Storybook to be ready
+          npx wait-on http://localhost:6006 -t 30000
+          # Run accessibility tests
           npx @axe-core/cli http://localhost:6006 --exit
+          # Kill the server
           kill $SERVER_PID || true
 
       - name: Upload test results
