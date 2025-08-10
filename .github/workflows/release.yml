@@ -48,7 +48,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm changeset publish --dry-run
+          publish: echo "Skipping publish - dry-run mode"
           version: pnpm changeset version
           commit: 'chore: release packages'
           title: 'chore: release packages'
