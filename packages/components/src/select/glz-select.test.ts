@@ -189,6 +189,9 @@ describe('glz-select', () => {
       ></glz-select>
     `);
     
+    // Force a re-render to ensure error state is applied
+    el.requestUpdate();
+    await el.updateComplete;
     await el.updateComplete;
     
     const errorDiv = el.shadowRoot?.querySelector('.error-message');
@@ -204,6 +207,9 @@ describe('glz-select', () => {
       ></glz-select>
     `);
     
+    // Force a re-render to ensure helper text is applied
+    el.requestUpdate();
+    await el.updateComplete;
     await el.updateComplete;
     
     const helper = el.shadowRoot?.querySelector('.helper-text');

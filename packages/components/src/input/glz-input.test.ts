@@ -101,6 +101,9 @@ describe('glz-input', () => {
       <glz-input error error-message="Please enter a valid email"></glz-input>
     `);
     
+    // Force a re-render to ensure error state is applied
+    el.requestUpdate();
+    await el.updateComplete;
     await el.updateComplete;
     
     const errorDiv = el.shadowRoot?.querySelector('.error-message');
@@ -114,6 +117,9 @@ describe('glz-input', () => {
       <glz-input helper-text="Enter your full name"></glz-input>
     `);
     
+    // Force a re-render to ensure helper text is applied
+    el.requestUpdate();
+    await el.updateComplete;
     await el.updateComplete;
     
     const helper = el.shadowRoot?.querySelector('.helper-text');
@@ -189,6 +195,9 @@ describe('glz-input', () => {
       ></glz-input>
     `);
     
+    // Force a re-render to ensure all properties are applied
+    el.requestUpdate();
+    await el.updateComplete;
     await el.updateComplete;
     
     const input = el.shadowRoot?.querySelector('input');

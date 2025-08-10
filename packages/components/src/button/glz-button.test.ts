@@ -114,7 +114,8 @@ describe('glz-button', () => {
     
     if (button) {
       // Simulate focus-visible state by checking CSS rule existence
-      const styles = el.constructor.styles as any;
+      const constructor = el.constructor as any;
+      const styles = constructor.styles;
       const cssText = styles[0]?.cssText || styles?.cssText || '';
       expect(cssText).toContain('focus-visible');
       expect(cssText).toContain('outline');

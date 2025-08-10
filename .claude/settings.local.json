@@ -19,7 +19,8 @@
       "mcp__github__get_workflow_run",
       "mcp__github__list_workflows",
       "mcp__github__get_file_contents",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(pnpm -w test --filter=@glaze/components)"
     ],
     "deny": []
   }

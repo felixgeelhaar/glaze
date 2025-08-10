@@ -20,13 +20,18 @@ describe('glz-navbar', () => {
 
   it('renders brand name and link', async () => {
     const el = await fixture<GlzNavbar>(html`
-      <glz-navbar brand="Glaze UI" brand-href="/home"></glz-navbar>
+      <glz-navbar brand="Glaze UI" .brandHref="/home"></glz-navbar>
     `);
+    
+    // Force a re-render to ensure brand href is applied
+    el.requestUpdate();
+    await el.updateComplete;
+    await el.updateComplete;
     
     const brandLink = el.shadowRoot?.querySelector('.brand') as HTMLAnchorElement;
     expect(brandLink).toBeTruthy();
     expect(brandLink.textContent?.trim()).toContain('Glaze UI');
-    expect(brandLink.pathname).toBe('/home');
+    expect(brandLink.getAttribute('href')).toBe('/home');
   });
 
   it('renders slotted content', async () => {

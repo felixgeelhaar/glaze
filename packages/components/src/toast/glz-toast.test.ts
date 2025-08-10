@@ -146,6 +146,11 @@ describe('glz-toast', () => {
       ></glz-toast>
     `);
     
+    // Force a re-render to ensure progress bar is applied
+    el.requestUpdate();
+    await el.updateComplete;
+    await el.updateComplete;
+    
     const progressBar = el.shadowRoot?.querySelector('.progress-bar');
     expect(progressBar).toBeTruthy();
     expect(progressBar?.getAttribute('style')).toContain('--duration: 5000ms');
