@@ -311,6 +311,14 @@ export class GlzMyComponent extends LitElement {
 
 3. Add exports and create stories for documentation.
 
+## 📦 Publishing
+
+The project is configured for automated npm publishing via GitHub Actions. To enable:
+1. Add `NPM_TOKEN` secret to GitHub repository settings
+2. Remove `--dry-run` flag from `.github/workflows/release.yml`
+3. Create changesets with `pnpm changeset`
+4. Push to main branch to trigger release
+
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
