@@ -49,13 +49,20 @@ The Glaze Design System consists of the following packages:
 ## ⚙️ Initial Setup
 
 ### Prerequisites
+
+> **⚠️ Important**: The packages are currently scoped to `@glaze`. The `@glaze` organization does not exist on npm yet. You must either:
+> 1. Create the `@glaze` organization on npm (requires npm account with organization creation rights)
+> 2. Change all package names to use your personal npm scope (e.g., `@yourusername/components`)
+> 3. Use the setup script below to automatically update package names
+
 1. **NPM Account**: Create an account at https://www.npmjs.com
-2. **NPM Token**: Generate a token with publish permissions:
+2. **NPM Organization** (if keeping @glaze scope): Create the organization at https://www.npmjs.com/org/create
+3. **NPM Token**: Generate a token with publish permissions:
    ```bash
    npm login
    npm token create --read-only=false
    ```
-3. **GitHub Secret**: Add the token to your repository:
+4. **GitHub Secret**: Add the token to your repository:
    - Go to Settings → Secrets and variables → Actions
    - Click "New repository secret"
    - Name: `NPM_TOKEN`
