@@ -1,6 +1,6 @@
 {
   "name": "@glaze/components",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Beautiful glassmorphism Web Components built with Lit",
   "type": "module",
   "main": "./dist/index.js",
