@@ -30,7 +30,9 @@
       "mcp__github__get_commit",
       "Bash(gh workflow run:*)",
       "Bash(gh repo view:*)",
-      "Bash(gh run list:*)"
+      "Bash(gh run list:*)",
+      "Bash(npm view:*)",
+      "Bash(node:*)"
     ],
     "deny": []
   }

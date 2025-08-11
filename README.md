@@ -2,6 +2,16 @@
 
 A modern, accessible design system built with Web Components and Lit, featuring beautiful glassmorphism aesthetics.
 
+![Glaze Design System Hero](./screenshots/hero.png)
+
+## 🎯 Live Demo
+
+Explore the components in action:
+
+![Vue Components Demo](./screenshots/vue-components.png)
+
+*Vue 3 components with glassmorphism effects*
+
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-passing-brightgreen)
 ![Tests](https://img.shields.io/badge/tests-109%2F109%20passing-success)
@@ -25,14 +35,23 @@ A modern, accessible design system built with Web Components and Lit, featuring 
 ## 📦 Installation
 
 ```bash
-npm install @glaze/components @glaze/tokens
+npm install @felixgeelhaar/glaze-components @felixgeelhaar/glaze-tokens
+# or
+pnpm add @felixgeelhaar/glaze-components @felixgeelhaar/glaze-tokens
+# or
+yarn add @felixgeelhaar/glaze-components @felixgeelhaar/glaze-tokens
 ```
 
-Or with yarn:
+## 📋 Available Packages
 
-```bash
-yarn add @glaze/components @glaze/tokens
-```
+| Package | Description | NPM |
+|---------|-------------|-----|
+| [@felixgeelhaar/glaze-components](./packages/components) | Core Web Components library | [![NPM](https://img.shields.io/npm/v/@felixgeelhaar/glaze-components.svg)](https://www.npmjs.com/package/@felixgeelhaar/glaze-components) |
+| [@felixgeelhaar/glaze-tokens](./packages/tokens) | Design tokens (CSS variables, JS objects) | [![NPM](https://img.shields.io/npm/v/@felixgeelhaar/glaze-tokens.svg)](https://www.npmjs.com/package/@felixgeelhaar/glaze-tokens) |
+| [@felixgeelhaar/glaze-engine](./packages/engine) | Tailwind/UnoCSS integration | [![NPM](https://img.shields.io/npm/v/@felixgeelhaar/glaze-engine.svg)](https://www.npmjs.com/package/@felixgeelhaar/glaze-engine) |
+| [@felixgeelhaar/glaze-react](./packages/react) | React component wrappers | [![NPM](https://img.shields.io/npm/v/@felixgeelhaar/glaze-react.svg)](https://www.npmjs.com/package/@felixgeelhaar/glaze-react) |
+| [@felixgeelhaar/glaze-vue](./packages/vue) | Vue 3 component wrappers | [![NPM](https://img.shields.io/npm/v/@felixgeelhaar/glaze-vue.svg)](https://www.npmjs.com/package/@felixgeelhaar/glaze-vue) |
+| [@felixgeelhaar/glaze-cli](./packages/cli) | Command-line interface | [![NPM](https://img.shields.io/npm/v/@felixgeelhaar/glaze-cli.svg)](https://www.npmjs.com/package/@felixgeelhaar/glaze-cli) |
 
 ## 🚀 Quick Start
 
@@ -43,7 +62,8 @@ yarn add @glaze/components @glaze/tokens
 <html>
 <head>
   <!-- Import tokens for theming -->
-  <link rel="stylesheet" href="node_modules/@glaze/tokens/dist/css/tokens.css">
+  <link rel="stylesheet" href="node_modules/@felixgeelhaar/glaze-components/dist/styles/tokens.css">
+  <link rel="stylesheet" href="node_modules/@felixgeelhaar/glaze-components/dist/styles/components.css">
 </head>
 <body>
   <!-- Use components -->
@@ -55,7 +75,7 @@ yarn add @glaze/components @glaze/tokens
 
   <!-- Import components -->
   <script type="module">
-    import '@glaze/components';
+    import '@felixgeelhaar/glaze-components';
   </script>
 </body>
 </html>
@@ -64,44 +84,70 @@ yarn add @glaze/components @glaze/tokens
 ### With a Framework
 
 #### React
+
+Use the dedicated React package for better integration:
+
 ```jsx
-import '@glaze/components';
-import '@glaze/tokens/dist/css/tokens.css';
+import { Button, Card } from '@felixgeelhaar/glaze-react';
+import '@felixgeelhaar/glaze-components/dist/styles/tokens.css';
+import '@felixgeelhaar/glaze-components/dist/styles/components.css';
 
 function App() {
   return (
-    <glz-card variant="glass">
-      <h2 slot="header">React App</h2>
-      <glz-button onClick={() => console.log('Clicked!')}>
+    <Card variant="glass" size="lg">
+      <h2>React App</h2>
+      <Button variant="glass" onClick={() => console.log('Clicked!')}>
         Glass Button
-      </glz-button>
-    </glz-card>
+      </Button>
+    </Card>
   );
 }
 ```
 
 #### Vue
+
+Use the dedicated Vue package for better integration:
+
 ```vue
 <template>
-  <glz-card variant="glass">
-    <h2 slot="header">Vue App</h2>
-    <glz-button @click="handleClick">Glass Button</glz-button>
-  </glz-card>
+  <GlzCard variant="glass" size="lg">
+    <h2>Vue App</h2>
+    <GlzButton variant="glass" @click="handleClick">
+      Glass Button
+    </GlzButton>
+  </GlzCard>
 </template>
 
-<script>
-import '@glaze/components';
-import '@glaze/tokens/dist/css/tokens.css';
+<script setup>
+import { GlzButton, GlzCard } from '@felixgeelhaar/glaze-vue';
+import '@felixgeelhaar/glaze-components/dist/styles/tokens.css';
+import '@felixgeelhaar/glaze-components/dist/styles/components.css';
 
-export default {
-  methods: {
-    handleClick() {
-      console.log('Clicked!');
-    }
-  }
-}
+const handleClick = () => {
+  console.log('Clicked!');
+};
 </script>
 ```
+
+### CLI Quick Start
+
+Get started even faster with the CLI:
+
+```bash
+npm install -g @felixgeelhaar/glaze-cli
+
+# Create a new project
+glaze init my-app --framework react --typescript
+
+# Add to existing project
+glaze add --framework vue
+```
+
+## 🎨 Full Component Preview
+
+![Full Page Demo](./screenshots/full-page.png)
+
+*Complete demo showcasing all components in action*
 
 ## 🧩 Components
 
