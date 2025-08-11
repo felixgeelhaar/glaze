@@ -1,0 +1,54 @@
+name: NPM Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g., 1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v${{ inputs.version }}
+          
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+          
+      - run: pnpm install --frozen-lockfile
+      
+      - run: pnpm -w build
+      
+      - run: pnpm -w test
+      
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          
+          for pkg in packages/*/package.json; do
+            if [ -f "$pkg" ]; then
+              PKG_DIR=$(dirname "$pkg")
+              PKG_NAME=$(jq -r '.name' "$pkg")
+              PKG_PRIVATE=$(jq -r '.private // false' "$pkg")
+              
+              if [ "$PKG_PRIVATE" != "true" ]; then
+                echo "Publishing $PKG_NAME..."
+                cd "$PKG_DIR"
+                npm publish --access public || echo "Failed or already published"
+                cd - > /dev/null
+              fi
+            fi
+          done
