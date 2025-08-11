@@ -6,7 +6,7 @@ import type {
   GlzNavbar,
   GlzSelect,
   GlzToast
-} from '@glaze/components';
+} from '@felixgeelhaar/glaze-components';
 
 // Re-export element types
 export type GlzButtonElement = GlzButton;

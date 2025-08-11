@@ -6,7 +6,7 @@ import type {
   GlzNavbar,
   GlzSelect,
   GlzToast
-} from '@glaze/components';
+} from '@felixgeelhaar/glaze-components';
 import type { MouseEventHandler, ReactNode } from 'react';
 
 // Re-export element types
