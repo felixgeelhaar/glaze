@@ -27,7 +27,9 @@
       "Bash(pnpm -w test:e2e)",
       "Bash(pnpm exec playwright test:*)",
       "Bash(git add:*)",
-      "mcp__github__get_commit"
+      "mcp__github__get_commit",
+      "Bash(gh workflow run:*)",
+      "Bash(gh repo view:*)"
     ],
     "deny": []
   }
