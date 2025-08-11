@@ -2,6 +2,19 @@
 
 This guide will help you set up npm publishing for the Glaze Design System packages.
 
+## 🚀 Quick Start - Tag-Based Publishing
+
+The simplest way to publish is using release tags:
+
+1. **Set up NPM_TOKEN** in GitHub Secrets (see [Initial Setup](#initial-setup) below)
+2. **Create and push a version tag**:
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+3. **Create a GitHub Release** from the tag - this triggers automatic npm publishing
+4. **Or manually trigger** the workflow from Actions → Publish to NPM → Run workflow
+
 ## 📦 Current Package Structure
 
 The Glaze Design System consists of the following packages:
@@ -11,6 +24,42 @@ The Glaze Design System consists of the following packages:
 - `@glaze/cli` - Command-line interface
 - `@glaze/react` - React wrapper components
 - `@glaze/vue` - Vue wrapper components
+
+## 🏷️ Tag-Based Release Workflow
+
+### Automatic Publishing via GitHub Releases
+1. Update package versions in `packages/*/package.json`
+2. Commit and push changes
+3. Create and push a tag:
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+4. Go to GitHub → Releases → Create a new release
+5. Select your tag and publish the release
+6. The workflow automatically publishes to npm
+
+### Manual Publishing via Workflow Dispatch
+1. Go to GitHub → Actions → Publish to NPM
+2. Click "Run workflow"
+3. Enter the tag (e.g., `v1.0.0`)
+4. Optionally enable dry-run mode to test
+5. Click "Run workflow"
+
+## ⚙️ Initial Setup
+
+### Prerequisites
+1. **NPM Account**: Create an account at https://www.npmjs.com
+2. **NPM Token**: Generate a token with publish permissions:
+   ```bash
+   npm login
+   npm token create --read-only=false
+   ```
+3. **GitHub Secret**: Add the token to your repository:
+   - Go to Settings → Secrets and variables → Actions
+   - Click "New repository secret"
+   - Name: `NPM_TOKEN`
+   - Value: Your npm token
 
 ## 🚀 Publishing Options
 

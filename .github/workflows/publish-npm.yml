@@ -1,0 +1,268 @@
+name: Publish to NPM
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to publish (e.g., v1.0.0)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Run in dry-run mode (no actual publishing)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    # Only run on release tags that match semantic versioning
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # For releases, use the tag; for manual dispatch, use the provided tag
+          ref: ${{ github.event_name == 'release' && github.event.release.tag_name || github.event.inputs.tag }}
+          fetch-depth: 0
+
+      - name: Validate tag format
+        run: |
+          TAG="${{ github.event_name == 'release' && github.event.release.tag_name || github.event.inputs.tag }}"
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9\.\-]+)?(\+[a-zA-Z0-9\.\-]+)?$ ]]; then
+            echo "❌ Invalid tag format: $TAG"
+            echo "Tags must follow semantic versioning (e.g., v1.0.0, v2.1.0-beta.1)"
+            exit 1
+          fi
+          echo "✅ Valid tag format: $TAG"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm -w build
+
+      - name: Run tests
+        run: pnpm -w test
+
+      - name: Check NPM authentication
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "❌ NPM_TOKEN secret is not set!"
+            echo "Please add your npm authentication token to GitHub Secrets."
+            echo "See docs/NPM_PUBLISHING.md for instructions."
+            exit 1
+          fi
+          echo "✅ NPM authentication token found"
+
+      - name: Configure npm for @glaze scope
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          echo "@glaze:registry=https://registry.npmjs.org/" >> ~/.npmrc
+          
+          # Check if we can authenticate
+          npm whoami || (echo "❌ Failed to authenticate with npm" && exit 1)
+          echo "✅ Successfully authenticated with npm"
+
+      - name: Check package versions
+        id: versions
+        run: |
+          echo "📦 Checking package versions..."
+          echo ""
+          
+          TAG="${{ github.event_name == 'release' && github.event.release.tag_name || github.event.inputs.tag }}"
+          VERSION="${TAG#v}"  # Remove 'v' prefix
+          
+          echo "Release version: $VERSION"
+          echo ""
+          echo "Package versions in repository:"
+          
+          for pkg in packages/*/package.json; do
+            if [ -f "$pkg" ]; then
+              PKG_NAME=$(jq -r '.name' "$pkg")
+              PKG_VERSION=$(jq -r '.version' "$pkg")
+              PKG_PRIVATE=$(jq -r '.private // false' "$pkg")
+              
+              if [ "$PKG_PRIVATE" != "true" ]; then
+                echo "  - $PKG_NAME@$PKG_VERSION"
+                
+                # Check if version matches tag
+                if [ "$PKG_VERSION" != "$VERSION" ]; then
+                  echo "    ⚠️  Warning: Package version ($PKG_VERSION) doesn't match tag version ($VERSION)"
+                fi
+              fi
+            fi
+          done
+
+      - name: Dry run - Check what would be published
+        if: github.event.inputs.dry_run == 'true'
+        run: |
+          echo "🔍 DRY RUN MODE - No packages will be published"
+          echo ""
+          echo "The following packages would be published:"
+          
+          for pkg in packages/*/package.json; do
+            if [ -f "$pkg" ]; then
+              PKG_DIR=$(dirname "$pkg")
+              PKG_NAME=$(jq -r '.name' "$pkg")
+              PKG_VERSION=$(jq -r '.version' "$pkg")
+              PKG_PRIVATE=$(jq -r '.private // false' "$pkg")
+              
+              if [ "$PKG_PRIVATE" != "true" ]; then
+                echo ""
+                echo "📦 $PKG_NAME@$PKG_VERSION"
+                cd "$PKG_DIR"
+                npm publish --dry-run 2>&1 | grep -E "npm notice|tarball|total files" || true
+                cd - > /dev/null
+              fi
+            fi
+          done
+          
+          echo ""
+          echo "✅ Dry run complete. No packages were published."
+
+      - name: Publish packages to npm
+        if: github.event.inputs.dry_run != 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "🚀 Publishing packages to npm..."
+          echo ""
+          
+          PUBLISHED_COUNT=0
+          FAILED_COUNT=0
+          
+          for pkg in packages/*/package.json; do
+            if [ -f "$pkg" ]; then
+              PKG_DIR=$(dirname "$pkg")
+              PKG_NAME=$(jq -r '.name' "$pkg")
+              PKG_VERSION=$(jq -r '.version' "$pkg")
+              PKG_PRIVATE=$(jq -r '.private // false' "$pkg")
+              
+              if [ "$PKG_PRIVATE" != "true" ]; then
+                echo "Publishing $PKG_NAME@$PKG_VERSION..."
+                
+                cd "$PKG_DIR"
+                
+                # Check if this version already exists
+                if npm view "$PKG_NAME@$PKG_VERSION" version 2>/dev/null; then
+                  echo "  ⚠️  Version $PKG_VERSION already exists on npm, skipping..."
+                else
+                  if npm publish --access public; then
+                    echo "  ✅ Successfully published $PKG_NAME@$PKG_VERSION"
+                    PUBLISHED_COUNT=$((PUBLISHED_COUNT + 1))
+                  else
+                    echo "  ❌ Failed to publish $PKG_NAME@$PKG_VERSION"
+                    FAILED_COUNT=$((FAILED_COUNT + 1))
+                  fi
+                fi
+                
+                cd - > /dev/null
+                echo ""
+              fi
+            fi
+          done
+          
+          echo "📊 Publishing Summary:"
+          echo "  - Published: $PUBLISHED_COUNT packages"
+          echo "  - Failed: $FAILED_COUNT packages"
+          
+          if [ $FAILED_COUNT -gt 0 ]; then
+            echo "❌ Some packages failed to publish"
+            exit 1
+          elif [ $PUBLISHED_COUNT -eq 0 ]; then
+            echo "⚠️  No new packages were published (all versions may already exist)"
+          else
+            echo "✅ All packages published successfully!"
+          fi
+
+      - name: Create GitHub Release Notes
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ github.event.inputs.tag }}"
+          
+          # Check if release already exists
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists, updating with npm publish status..."
+            
+            CURRENT_BODY=$(gh release view "$TAG" --json body -q .body)
+            
+            NEW_BODY="$CURRENT_BODY
+
+## 📦 NPM Publishing
+
+Packages have been published to npm: https://www.npmjs.com/org/glaze
+
+Published at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            
+            gh release edit "$TAG" --notes "$NEW_BODY"
+          else
+            echo "Creating new release for $TAG..."
+            
+            # Create release with auto-generated notes
+            gh release create "$TAG" \
+              --title "Release $TAG" \
+              --notes "## 📦 NPM Packages
+
+The following packages have been published to npm:
+
+$(for pkg in packages/*/package.json; do
+  if [ -f "$pkg" ]; then
+    PKG_NAME=$(jq -r '.name' "$pkg")
+    PKG_VERSION=$(jq -r '.version' "$pkg")
+    PKG_PRIVATE=$(jq -r '.private // false' "$pkg")
+    if [ "$PKG_PRIVATE" != "true" ]; then
+      echo "- [$PKG_NAME@$PKG_VERSION](https://www.npmjs.com/package/$PKG_NAME)"
+    fi
+  fi
+done)
+
+Published at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          fi
+
+      - name: Post-publish summary
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          echo "🎉 Release Complete!"
+          echo ""
+          echo "View your packages on npm:"
+          
+          for pkg in packages/*/package.json; do
+            if [ -f "$pkg" ]; then
+              PKG_NAME=$(jq -r '.name' "$pkg")
+              PKG_PRIVATE=$(jq -r '.private // false' "$pkg")
+              
+              if [ "$PKG_PRIVATE" != "true" ]; then
+                echo "  - https://www.npmjs.com/package/$PKG_NAME"
+              fi
+            fi
+          done
+          
+          echo ""
+          echo "To install the packages:"
+          echo "  npm install @glaze/components"
+          echo "  npm install @glaze/tokens"
+          echo "  # etc."
