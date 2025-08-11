@@ -1,9 +1,9 @@
 import type { Preview } from '@storybook/web-components';
-import '@glaze/components/dist/styles/tokens.css';
-import '@glaze/components/dist/styles/components.css';
+import '@felixgeelhaar/glaze-components/dist/styles/tokens.css';
+import '@felixgeelhaar/glaze-components/dist/styles/components.css';
 
 // Register all components
-import '@glaze/components';
+import '@felixgeelhaar/glaze-components';
 
 const preview: Preview = {
   parameters: {
