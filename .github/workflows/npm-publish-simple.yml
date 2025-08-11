@@ -1,0 +1,45 @@
+name: NPM Publish Simple
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+          
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+          
+      - run: pnpm install --frozen-lockfile
+      
+      # Build only the packages (not demo/docs)
+      - run: |
+          pnpm --filter=@felixgeelhaar/glaze-tokens build
+          pnpm --filter=@felixgeelhaar/glaze-components build
+          pnpm --filter=@felixgeelhaar/glaze-engine build
+          pnpm --filter=@felixgeelhaar/glaze-react build
+          pnpm --filter=@felixgeelhaar/glaze-vue build
+          pnpm --filter=@felixgeelhaar/glaze-cli build
+      
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          
+          # Publish in dependency order
+          cd packages/tokens && npm publish --access public || echo "Already published"
+          cd ../components && npm publish --access public || echo "Already published"
+          cd ../engine && npm publish --access public || echo "Already published"
+          cd ../react && npm publish --access public || echo "Already published"
+          cd ../vue && npm publish --access public || echo "Already published"
+          cd ../cli && npm publish --access public || echo "Already published"
