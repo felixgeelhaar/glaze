@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createApp } from 'vue';
-import { GlazePlugin, GlzInput, GlzToast } from '@glaze/vue';
+import { GlazePlugin, GlzInput, GlzToast } from '@felixgeelhaar/glaze-vue';
 import '@glaze/components/dist/styles/tokens.css';
 import '@glaze/components/dist/styles/components.css';
 

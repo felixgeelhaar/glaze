@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
-import { glazePreset } from '@glaze/engine/preset';
-import { glazePlugin } from '@glaze/engine/plugin';
+import { glazePreset } from '@felixgeelhaar/glaze-engine/preset';
+import { glazePlugin } from '@felixgeelhaar/glaze-engine/plugin';
 
 const config: Config = {
   content: [
