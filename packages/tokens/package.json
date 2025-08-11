@@ -1,5 +1,5 @@
 {
-  "name": "@glaze/tokens",
+  "name": "@felixgeelhaar/glaze-tokens",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/ts/index.js",

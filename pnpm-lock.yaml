@@ -57,19 +57,19 @@ importers:
 
   apps/demo:
     dependencies:
-      '@glaze/components':
+      '@felixgeelhaar/glaze-components':
         specifier: workspace:*
         version: link:../../packages/components
-      '@glaze/engine':
+      '@felixgeelhaar/glaze-engine':
         specifier: workspace:*
         version: link:../../packages/engine
-      '@glaze/react':
+      '@felixgeelhaar/glaze-react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@glaze/tokens':
+      '@felixgeelhaar/glaze-tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
-      '@glaze/vue':
+      '@felixgeelhaar/glaze-vue':
         specifier: workspace:*
         version: link:../../packages/vue
       vue:
@@ -115,10 +115,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@glaze/engine':
+      '@felixgeelhaar/glaze-engine':
         specifier: workspace:*
         version: link:../engine
-      '@glaze/tokens':
+      '@felixgeelhaar/glaze-tokens':
         specifier: workspace:*
         version: link:../tokens
     devDependencies:
@@ -195,13 +195,13 @@ importers:
 
   packages/docs:
     dependencies:
-      '@glaze/components':
+      '@felixgeelhaar/glaze-components':
         specifier: workspace:*
         version: link:../components
-      '@glaze/react':
+      '@felixgeelhaar/glaze-react':
         specifier: workspace:*
         version: link:../react
-      '@glaze/vue':
+      '@felixgeelhaar/glaze-vue':
         specifier: workspace:*
         version: link:../vue
       lit:
@@ -259,7 +259,7 @@ importers:
 
   packages/engine:
     dependencies:
-      '@glaze/tokens':
+      '@felixgeelhaar/glaze-tokens':
         specifier: workspace:*
         version: link:../tokens
       '@unocss/core':
@@ -287,7 +287,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@glaze/components':
+      '@felixgeelhaar/glaze-components':
         specifier: workspace:*
         version: link:../components
     devDependencies:
@@ -328,7 +328,7 @@ importers:
 
   packages/vue:
     dependencies:
-      '@glaze/components':
+      '@felixgeelhaar/glaze-components':
         specifier: workspace:*
         version: link:../components
     devDependencies:

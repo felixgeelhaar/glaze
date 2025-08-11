@@ -1,5 +1,5 @@
 {
-  "name": "@glaze/components",
+  "name": "@felixgeelhaar/glaze-components",
   "version": "1.0.0",
   "description": "Beautiful glassmorphism Web Components built with Lit",
   "type": "module",

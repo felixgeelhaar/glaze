@@ -1,5 +1,5 @@
 {
-  "name": "@glaze/cli",
+  "name": "@felixgeelhaar/glaze-cli",
   "version": "1.0.0",
   "type": "module",
   "bin": {
@@ -15,8 +15,8 @@
     "test": "echo \"No tests yet\""
   },
   "dependencies": {
-    "@glaze/engine": "workspace:*",
-    "@glaze/tokens": "workspace:*"
+    "@felixgeelhaar/glaze-engine": "workspace:*",
+    "@felixgeelhaar/glaze-tokens": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.2.1",

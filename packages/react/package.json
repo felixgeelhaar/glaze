@@ -1,5 +1,5 @@
 {
-  "name": "@glaze/react",
+  "name": "@felixgeelhaar/glaze-react",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -20,7 +20,7 @@
     "test": "echo \"No tests yet\""
   },
   "dependencies": {
-    "@glaze/components": "workspace:*"
+    "@felixgeelhaar/glaze-components": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.0.0",

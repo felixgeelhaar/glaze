@@ -1,5 +1,5 @@
 {
-  "name": "@glaze/docs",
+  "name": "@felixgeelhaar/glaze-docs",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,9 +11,9 @@
     "test": "echo \"No tests yet\""
   },
   "dependencies": {
-    "@glaze/components": "workspace:*",
-    "@glaze/react": "workspace:*",
-    "@glaze/vue": "workspace:*",
+    "@felixgeelhaar/glaze-components": "workspace:*",
+    "@felixgeelhaar/glaze-react": "workspace:*",
+    "@felixgeelhaar/glaze-vue": "workspace:*",
     "lit": "^3.3.1"
   },
   "devDependencies": {
