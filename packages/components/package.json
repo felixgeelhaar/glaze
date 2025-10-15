@@ -70,7 +70,7 @@
     "axe-core": "4.10.3",
     "bundlesize": "^0.18.2",
     "eslint": "^9.33.0",
-    "happy-dom": "18.0.1",
+    "happy-dom": "20.0.2",
     "jest-axe": "10.0.0",
     "jsdom": "26.1.0",
     "typescript": "^5.9.2",
