@@ -23,7 +23,7 @@
     "setup:npm": "node scripts/setup-npm-publishing.js"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.5",
+    "@changesets/cli": "^2.29.8",
     "@eslint/js": "9.33.0",
     "@playwright/test": "^1.54.2",
     "@types/node": "^24.2.1",
