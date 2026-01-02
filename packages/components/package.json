@@ -53,6 +53,7 @@
     "url": "https://github.com/glaze-design-system/glaze/issues"
   },
   "dependencies": {
+    "@felixgeelhaar/glaze-tokens": "workspace:*",
     "lit": "^3.3.1",
     "tslib": "^2.8.1"
   },
