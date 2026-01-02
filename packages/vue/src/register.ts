@@ -2,7 +2,7 @@
 
 // Import all components to trigger their registration
 // Import from main index to ensure all components are registered
-import '@glaze/components';
+import '@felixgeelhaar/glaze-components';
 
 // Mark as registered to prevent double registration
 declare global {

@@ -35,7 +35,7 @@ const config: StorybookConfig = {
       ...config.optimizeDeps,
       include: [
         ...(config.optimizeDeps?.include || []),
-        '@glaze/components',
+        '@felixgeelhaar/glaze-components',
         'lit',
       ],
     };

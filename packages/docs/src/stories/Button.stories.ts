@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import { userEvent, within } from '@storybook/test';
-import '@glaze/components';
+import '@felixgeelhaar/glaze-components';
 
 const meta: Meta = {
   title: 'Components/Button',
