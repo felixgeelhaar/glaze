@@ -75,7 +75,7 @@
     "jest-axe": "10.0.0",
     "jsdom": "26.1.0",
     "typescript": "^5.9.2",
-    "vitest": "^3.2.4"
+    "vitest": "^4.1.0"
   },
   "customElements": "dist/custom-elements.json",
   "bundlesize": [
