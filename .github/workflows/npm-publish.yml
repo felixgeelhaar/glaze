@@ -202,44 +202,35 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           TAG="${{ inputs.tag }}"
-          
+          NOW="$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
           # Check if release already exists
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG already exists, updating with npm publish status..."
-            
+
             CURRENT_BODY=$(gh release view "$TAG" --json body -q .body)
-            
-            NEW_BODY="$CURRENT_BODY
+            NEW_BODY=$(printf '%s\n\n## 📦 NPM Publishing\n\nPackages have been published to npm: https://www.npmjs.com/org/glaze\n\nPublished at: %s\n' "$CURRENT_BODY" "$NOW")
 
-## 📦 NPM Publishing
-
-Packages have been published to npm: https://www.npmjs.com/org/glaze
-
-Published at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-            
             gh release edit "$TAG" --notes "$NEW_BODY"
           else
             echo "Creating new release for $TAG..."
-            
+
+            PKG_LIST=$(for pkg in packages/*/package.json; do
+              if [ -f "$pkg" ]; then
+                PKG_NAME=$(jq -r '.name' "$pkg")
+                PKG_VERSION=$(jq -r '.version' "$pkg")
+                PKG_PRIVATE=$(jq -r '.private // false' "$pkg")
+                if [ "$PKG_PRIVATE" != "true" ]; then
+                  echo "- [$PKG_NAME@$PKG_VERSION](https://www.npmjs.com/package/$PKG_NAME)"
+                fi
+              fi
+            done)
+            NOTES=$(printf '## 📦 NPM Packages\n\nThe following packages have been published to npm:\n\n%s\n\nPublished at: %s\n' "$PKG_LIST" "$NOW")
+
             # Create release with auto-generated notes
             gh release create "$TAG" \
               --title "Release $TAG" \
-              --notes "## 📦 NPM Packages
-
-The following packages have been published to npm:
-
-$(for pkg in packages/*/package.json; do
-  if [ -f "$pkg" ]; then
-    PKG_NAME=$(jq -r '.name' "$pkg")
-    PKG_VERSION=$(jq -r '.version' "$pkg")
-    PKG_PRIVATE=$(jq -r '.private // false' "$pkg")
-    if [ "$PKG_PRIVATE" != "true" ]; then
-      echo "- [$PKG_NAME@$PKG_VERSION](https://www.npmjs.com/package/$PKG_NAME)"
-    fi
-  fi
-done)
-
-Published at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+              --notes "$NOTES"
           fi
 
       - name: Post-publish summary
