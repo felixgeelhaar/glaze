@@ -100,3 +100,6 @@ playwright-report/
 
 # Changeset (ignore temp files but allow config and changesets)
 .changeset/.git-keep
+# nox scan output (the committed baseline lives in .nox/)
+nox-results/
+findings.json

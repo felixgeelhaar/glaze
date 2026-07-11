@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "entries": [
+    {
+      "fingerprint": "86fa5ac49cf751fdf891afbada03dbec5db863854af6326729ae5e4794af8846",
+      "rule_id": "IAC-015",
+      "file_path": ".github/workflows/release.yml",
+      "severity": "high",
+      "created_at": "2026-07-11T11:19:17.398501Z"
+    },
+    {
+      "fingerprint": "4da2ab2e8a1568ed77c34c43d4300b9832edda20314f01fae4569a227612fbb8",
+      "rule_id": "IAC-351",
+      "file_path": ".github/workflows/release.yml",
+      "severity": "critical",
+      "created_at": "2026-07-11T11:19:17.398501Z"
+    }
+  ]
+}
