@@ -15,6 +15,7 @@
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{js,ts,tsx,jsx,json,md,css}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,tsx,jsx,json,md,css}\"",
     "clean": "turbo run clean && rm -rf node_modules",
     "changeset": "changeset",
     "version": "changeset version",

@@ -1,0 +1,52 @@
+# warden — local CI gate for glaze (the design-system pnpm monorepo). warden
+# is the sole hook manager; this repo has no husky/lint-staged to remove. Hooks
+# live in .git/hooks and auto-fetch the warden binary if missing, so a fresh
+# clone is gated without any pnpm devDependency. pre-commit stays fast
+# (typecheck + format check); pre-push runs the same checks CI runs, so nothing
+# leaves the machine that CI would reject.
+extends: ''
+agent: auto
+hooks:
+  pre_commit: true
+  pre_push: true
+commands:
+  # Mapped to this repo's REAL package.json scripts (turbo-driven). Custom keys
+  # (typecheck/formatcheck/lint/test/build) are used so warden runs THESE exact
+  # pnpm scripts rather than its own built-in lint/test defaults. `format:check`
+  # was added to package.json in this migration (the repo previously had only
+  # `format` --write); it verifies formatting without mutating the tree.
+  typecheck: pnpm -w typecheck
+  formatcheck: pnpm -w format:check
+  lint: pnpm -w lint
+  test: pnpm -w test
+  build: pnpm -w build
+steps:
+  # Fast gate on commit: types + formatting. Each step runs in an isolated
+  # worktree (verify-only — warden never mutates your tree), so formatting is
+  # CHECKED and blocked here, not auto-fixed. Run `pnpm format` to fix.
+  pre_commit:
+    - typecheck
+    - formatcheck
+  # Full CI parity on push: mirrors the "Build, Lint, and Test" + "TypeScript
+  # Type Checking" CI jobs (lint / typecheck / test / build). The heavy,
+  # optional CI jobs (accessibility, e2e, bundle-size) are left to CI.
+  pre_push:
+    - rebase
+    - typecheck
+    - formatcheck
+    - lint
+    - test
+    - build
+timeouts: {}
+cache: {}
+agent_commands: {}
+parallel: null
+notify: null
+risk:
+  diff_lines_high: 400
+  files_touched_high: 15
+pr:
+  enabled: false
+  base: ''
+  comment: null
+rules: []
