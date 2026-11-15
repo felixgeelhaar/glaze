@@ -14,6 +14,294 @@
       "file_path": ".github/workflows/release.yml",
       "severity": "critical",
       "created_at": "2026-07-11T11:19:17.398501Z"
+    },
+    {
+      "fingerprint": "efffd45e45bdf218052ebd23a0a2fc2295219290f6341d868fed455c871b6993",
+      "rule_id": "IAC-155",
+      "file_path": ".github/workflows/nox-remediate.yml",
+      "severity": "medium",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "0c4b2c099b3b851994888b6de94ed742f6e835dfce1777b853fc879b3d2fcb23",
+      "rule_id": "IAC-155",
+      "file_path": ".github/workflows/npm-publish-simple.yml",
+      "severity": "medium",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "9cecf7d8d0b00a5fba8c5d798ca6cde992a49735dd5198390e3084ebc508ebea",
+      "rule_id": "IAC-155",
+      "file_path": ".github/workflows/npm-publish.yml",
+      "severity": "medium",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "2a6ea401963b03f032ac448b6ec240e9fb40809ef1c00d694a1196c93104efb5",
+      "rule_id": "IAC-155",
+      "file_path": ".github/workflows/npm-release.yml",
+      "severity": "medium",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "52922952e40b8c5ebd4fef0969dd782d57266e9ecccc4e9bddc9be74f0f6daa2",
+      "rule_id": "IAC-308",
+      "file_path": ".github/workflows/nox-remediate.yml",
+      "severity": "low",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "4901418afce676c2c5e500a960daf43f185860c297c5bb7e0028988f0f5a4e98",
+      "rule_id": "IAC-308",
+      "file_path": ".github/workflows/npm-publish-simple.yml",
+      "severity": "low",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "f6bb176faa6c4c9e158459bb5c0d0cffe81b00607e5d0812ff1448bf5b0170d2",
+      "rule_id": "IAC-308",
+      "file_path": ".github/workflows/npm-publish.yml",
+      "severity": "low",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "6ee6d43d53e37d5a5c2cc2e7021dae0cc08711841f10c43ebc6e7e1f13271a6d",
+      "rule_id": "IAC-308",
+      "file_path": ".github/workflows/npm-release.yml",
+      "severity": "low",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "be245a4499fe01a73e9664baf0ed8c855e243ef4da2b278bd541e113a9dfae2e",
+      "rule_id": "IAC-306",
+      "file_path": ".github/workflows/release.yml",
+      "severity": "medium",
+      "reason": "Release/remediate workflow must push commits, open PRs, publish packages; permission is scoped to the single job and required for changesets/npm publishing.",
+      "created_at": "2026-11-15T10:48:37.364496Z"
+    },
+    {
+      "fingerprint": "8378df7a1d4adb5806616a668bc89e456b48fe9b7212ca5799b5b8eddbe0ae9c",
+      "rule_id": "IAC-314",
+      "file_path": ".github/workflows/nox-remediate.yml",
+      "severity": "medium",
+      "reason": "Release/remediate workflow must push commits, open PRs, publish packages; permission is scoped to the single job and required for changesets/npm publishing.",
+      "created_at": "2026-11-15T10:48:37.364496Z"
+    },
+    {
+      "fingerprint": "e37e2faa5f7d812400d1323a31d22e93b710b881ea06f3b656d724454d47a8f4",
+      "rule_id": "IAC-314",
+      "file_path": ".github/workflows/release.yml",
+      "severity": "medium",
+      "reason": "Release/remediate workflow must push commits, open PRs, publish packages; permission is scoped to the single job and required for changesets/npm publishing.",
+      "created_at": "2026-11-15T10:48:37.364496Z"
+    },
+    {
+      "fingerprint": "67d1566bc98dd13ba7ce93f32980089dd18f1516c29d70443f17566e2ea4dea6",
+      "rule_id": "IAC-315",
+      "file_path": ".github/workflows/release.yml",
+      "severity": "medium",
+      "reason": "Release/remediate workflow must push commits, open PRs, publish packages; permission is scoped to the single job and required for changesets/npm publishing.",
+      "created_at": "2026-11-15T10:48:37.364496Z"
+    },
+    {
+      "fingerprint": "bc549bd83bda47b0f1e5c6cb3fc9d67db65f4fbd72cdd30697bdbc6657d167bb",
+      "rule_id": "IAC-018",
+      "file_path": ".github/workflows/ci.yml",
+      "severity": "low",
+      "reason": "Intentionally non-blocking check (accessibility smoke test / optional E2E); failures are surfaced in logs without blocking merges.",
+      "created_at": "2026-11-15T10:48:43.113102Z"
+    },
+    {
+      "fingerprint": "faae53eee5aab123b480b37ae6df3775272ea7eb6546c6b64ee45cf14a19b173",
+      "rule_id": "IAC-310",
+      "file_path": ".github/workflows/ci.yml",
+      "severity": "medium",
+      "reason": "Intentionally non-blocking check (accessibility smoke test / optional E2E); failures are surfaced in logs without blocking merges.",
+      "created_at": "2026-11-15T10:49:20.498545Z"
+    },
+    {
+      "fingerprint": "35ce3f12bef7fe540ceb0be7753bf4b1f34e3d6e24ae38692875373c15692c99",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/form/glz-form.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "ce70567439abc0e9301590e195023e45393631534e4c9866ed3534e7f95685f5",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/input/glz-input.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "bcc8e6796a7f5a1302c5cfe131cc19227710dc619a68dc8a987a30b0b3f62dc3",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/showcase/glaze-showcase.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "2112ecf4cae5a8af5605d2404237403b76d03c36c7e6cc38dca11c3e74e721d0",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/table/glz-table.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "77c97e47ea74bb0de393ecdc90d817298bdabd0ab9a97602f1043a2a7c64d66a",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/table/glz-table.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "ac92814663c80a9981e69049592dadfd69aa650009417a1a91518273bb0b980d",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/table/glz-table.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "e8222af862d50b8fc54bffe50de6a967d28cd66b2e41cb4ba41035c375bec692",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/table/glz-table.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "e37a1ce31aeaaadd64d29e717505bde24279eea29047115ca0a4536a3b0ffd08",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/table/glz-table.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "656fdbf16e652113d7837c8fde466ddf2ff7d30f1c2b06fca16c783a416f9fc0",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/table/glz-table.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "41a2b4682388a4717650bd38ed1d9c9d42386b10da19dcd50bc8cbe740ab4e97",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/table/glz-table.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "505f1b6354e1c853124b258f1dc3bb7d7dcd4d54e5887495fa05a31fc713ad11",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/table/glz-table.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "aa449a1d8ad11619c7f2b8a526adb83fc0092e13f4fc8623476dc44f28ef6ec5",
+      "rule_id": "DATA-001",
+      "file_path": "packages/components/src/tooltip/glz-tooltip.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "395f9c96169b01c9c2988c5eb5cf97be01799e93120e61d65fc38ca1cea9045a",
+      "rule_id": "DATA-001",
+      "file_path": "packages/docs/src/stories/Dialog.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "26635cda89379ddd50118999b2ad373cae9a81ef1467ccf74960f35fffd76eb8",
+      "rule_id": "DATA-001",
+      "file_path": "packages/docs/src/stories/Input.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "660925cd5c7d437e64117e398db95ec61d11612a071bf06c7d798903cf30fe36",
+      "rule_id": "DATA-001",
+      "file_path": "packages/docs/src/stories/Input.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "dcb68d3076d85fca1869640376eaa84c2d6f5415eeeeeb7474b8b47c022ffae3",
+      "rule_id": "DATA-001",
+      "file_path": "packages/docs/src/stories/ThemePlayground.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: reserved example.com placeholder addresses in Storybook stories, no real personal data.",
+      "created_at": "2026-11-15T10:50:34.327639Z"
+    },
+    {
+      "fingerprint": "a85e538f61cbab638a2b02c544ddc6f8dd8606e290ffea636708b1d96009e65e",
+      "rule_id": "SEC-163",
+      "file_path": "packages/components/src/button/glz-button.ts",
+      "severity": "medium",
+      "reason": "False positive: Lit event-binding syntax (@click=\"${...}\") in component templates, not a secret.",
+      "created_at": "2026-11-15T10:50:41.518583Z"
+    },
+    {
+      "fingerprint": "ebb9c0b8f75d16331a5161f24abcc441998b5b1e62c256c8031f3e10219c35f5",
+      "rule_id": "SEC-163",
+      "file_path": "packages/components/src/button/glz-button.ts",
+      "severity": "medium",
+      "reason": "False positive: Lit event-binding syntax (@click=\"${...}\") in component templates, not a secret.",
+      "created_at": "2026-11-15T10:50:41.518583Z"
+    },
+    {
+      "fingerprint": "f78a9f5b10623d85ea6811cfad20a69592fa7920098e79a46affacd008fd36d1",
+      "rule_id": "SEC-163",
+      "file_path": "packages/components/src/select/glz-select.ts",
+      "severity": "medium",
+      "reason": "False positive: Lit event-binding syntax (@click=\"${...}\") in component templates, not a secret.",
+      "created_at": "2026-11-15T10:50:41.518583Z"
+    },
+    {
+      "fingerprint": "e4aeb2573742e39bd08b1b775f2be746195e3b837bee0b883d2867c43e32fca3",
+      "rule_id": "SLOP-001",
+      "file_path": "packages/components/src/accordion/glz-accordion.stories.ts",
+      "severity": "medium",
+      "reason": "False positive: import statements shown as documentation text inside a \u003cpre\u003e in a story; @glaze/components is this project's own package.",
+      "created_at": "2026-11-15T10:50:53.774758Z"
+    },
+    {
+      "fingerprint": "330349004dcccab8e7dcc5320adb01b1cf4a4453d7eaf3362530701390e36f1b",
+      "rule_id": "IAC-193",
+      "file_path": ".github/workflows/ci.yml",
+      "severity": "medium",
+      "reason": "Value written to GITHUB_OUTPUT is the local pnpm store path, not attacker-controlled input.",
+      "created_at": "2026-11-15T10:51:06.233036Z"
+    },
+    {
+      "fingerprint": "87ac3a7327df4d6e0e27b427dbea7e913678f6de33fb096ec048f51816158f40",
+      "rule_id": "VULN-001",
+      "file_path": "pnpm-lock.yaml",
+      "severity": "medium",
+      "reason": "deepmerge@4.3.1 GHSA-gcqx-w48m-w2h4: no upstream fix released. Dev-only transitive of @web/dev-server and rollup node-resolve test tooling, never shipped. Tracked in a repo issue.",
+      "created_at": "2026-11-15T10:51:11.295579Z"
     }
   ]
 }

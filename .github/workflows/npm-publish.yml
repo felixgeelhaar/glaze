@@ -77,9 +77,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
-          echo "@glaze:registry=https://registry.npmjs.org/" >> ~/.npmrc
-          
           # Check if we can authenticate
           npm whoami || (echo "❌ Failed to authenticate with npm" && exit 1)
           echo "✅ Successfully authenticated with npm"
