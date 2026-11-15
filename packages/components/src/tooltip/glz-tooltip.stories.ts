@@ -257,7 +257,7 @@ export const FormFieldTooltips: Story = {
         </label>
         <input 
           type="email" 
-          placeholder="your@email.com"
+          placeholder="you@example.com"
           style="width: 100%; padding: 0.5rem; border: 1px solid var(--color-glass-border); border-radius: 8px; background: transparent;"
         />
       </div>
