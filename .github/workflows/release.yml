@@ -109,13 +109,6 @@ jobs:
       - name: Build packages
         run: pnpm -w build
 
-      - name: Configure npm for GitHub Packages
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "@glaze:registry=https://npm.pkg.github.com" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
-
       - name: Publish to GitHub Packages (Dry Run)
         run: |
           echo "🎭 GitHub Packages Dry Run"

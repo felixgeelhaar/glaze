@@ -14,6 +14,118 @@
       "file_path": ".github/workflows/release.yml",
       "severity": "critical",
       "created_at": "2026-07-11T11:19:17.398501Z"
+    },
+    {
+      "fingerprint": "efffd45e45bdf218052ebd23a0a2fc2295219290f6341d868fed455c871b6993",
+      "rule_id": "IAC-155",
+      "file_path": ".github/workflows/nox-remediate.yml",
+      "severity": "medium",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "0c4b2c099b3b851994888b6de94ed742f6e835dfce1777b853fc879b3d2fcb23",
+      "rule_id": "IAC-155",
+      "file_path": ".github/workflows/npm-publish-simple.yml",
+      "severity": "medium",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "9cecf7d8d0b00a5fba8c5d798ca6cde992a49735dd5198390e3084ebc508ebea",
+      "rule_id": "IAC-155",
+      "file_path": ".github/workflows/npm-publish.yml",
+      "severity": "medium",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "2a6ea401963b03f032ac448b6ec240e9fb40809ef1c00d694a1196c93104efb5",
+      "rule_id": "IAC-155",
+      "file_path": ".github/workflows/npm-release.yml",
+      "severity": "medium",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "52922952e40b8c5ebd4fef0969dd782d57266e9ecccc4e9bddc9be74f0f6daa2",
+      "rule_id": "IAC-308",
+      "file_path": ".github/workflows/nox-remediate.yml",
+      "severity": "low",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "4901418afce676c2c5e500a960daf43f185860c297c5bb7e0028988f0f5a4e98",
+      "rule_id": "IAC-308",
+      "file_path": ".github/workflows/npm-publish-simple.yml",
+      "severity": "low",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "f6bb176faa6c4c9e158459bb5c0d0cffe81b00607e5d0812ff1448bf5b0170d2",
+      "rule_id": "IAC-308",
+      "file_path": ".github/workflows/npm-publish.yml",
+      "severity": "low",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "6ee6d43d53e37d5a5c2cc2e7021dae0cc08711841f10c43ebc6e7e1f13271a6d",
+      "rule_id": "IAC-308",
+      "file_path": ".github/workflows/npm-release.yml",
+      "severity": "low",
+      "reason": "Intentional maintainer-triggered workflow_dispatch (manual publish/remediate); runs only for users with write access, secrets are repo-scoped.",
+      "created_at": "2026-11-15T10:48:30.426358Z"
+    },
+    {
+      "fingerprint": "be245a4499fe01a73e9664baf0ed8c855e243ef4da2b278bd541e113a9dfae2e",
+      "rule_id": "IAC-306",
+      "file_path": ".github/workflows/release.yml",
+      "severity": "medium",
+      "reason": "Release/remediate workflow must push commits, open PRs, publish packages; permission is scoped to the single job and required for changesets/npm publishing.",
+      "created_at": "2026-11-15T10:48:37.364496Z"
+    },
+    {
+      "fingerprint": "8378df7a1d4adb5806616a668bc89e456b48fe9b7212ca5799b5b8eddbe0ae9c",
+      "rule_id": "IAC-314",
+      "file_path": ".github/workflows/nox-remediate.yml",
+      "severity": "medium",
+      "reason": "Release/remediate workflow must push commits, open PRs, publish packages; permission is scoped to the single job and required for changesets/npm publishing.",
+      "created_at": "2026-11-15T10:48:37.364496Z"
+    },
+    {
+      "fingerprint": "e37e2faa5f7d812400d1323a31d22e93b710b881ea06f3b656d724454d47a8f4",
+      "rule_id": "IAC-314",
+      "file_path": ".github/workflows/release.yml",
+      "severity": "medium",
+      "reason": "Release/remediate workflow must push commits, open PRs, publish packages; permission is scoped to the single job and required for changesets/npm publishing.",
+      "created_at": "2026-11-15T10:48:37.364496Z"
+    },
+    {
+      "fingerprint": "67d1566bc98dd13ba7ce93f32980089dd18f1516c29d70443f17566e2ea4dea6",
+      "rule_id": "IAC-315",
+      "file_path": ".github/workflows/release.yml",
+      "severity": "medium",
+      "reason": "Release/remediate workflow must push commits, open PRs, publish packages; permission is scoped to the single job and required for changesets/npm publishing.",
+      "created_at": "2026-11-15T10:48:37.364496Z"
+    },
+    {
+      "fingerprint": "bc549bd83bda47b0f1e5c6cb3fc9d67db65f4fbd72cdd30697bdbc6657d167bb",
+      "rule_id": "IAC-018",
+      "file_path": ".github/workflows/ci.yml",
+      "severity": "low",
+      "reason": "Intentionally non-blocking check (accessibility smoke test / optional E2E); failures are surfaced in logs without blocking merges.",
+      "created_at": "2026-11-15T10:48:43.113102Z"
+    },
+    {
+      "fingerprint": "faae53eee5aab123b480b37ae6df3775272ea7eb6546c6b64ee45cf14a19b173",
+      "rule_id": "IAC-310",
+      "file_path": ".github/workflows/ci.yml",
+      "severity": "medium",
+      "reason": "Intentionally non-blocking check (accessibility smoke test / optional E2E); failures are surfaced in logs without blocking merges.",
+      "created_at": "2026-11-15T10:49:20.498545Z"
     }
   ]
 }

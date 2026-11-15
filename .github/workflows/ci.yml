@@ -36,7 +36,8 @@ jobs:
         id: pnpm-store
         shell: bash
         run: |
-          echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+          STORE_PATH="$(pnpm store path --silent)"
+          echo "path=${STORE_PATH}" >> "$GITHUB_OUTPUT"
 
       - name: Setup pnpm cache
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
