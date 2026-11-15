@@ -12,6 +12,7 @@ Explore the components in action:
 
 *Vue 3 components with glassmorphism effects*
 
+[![nox security grade](.github/nox-badge.svg)](.github/workflows/nox-scan.yml)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-passing-brightgreen)
 ![Tests](https://img.shields.io/badge/tests-109%2F109%20passing-success)
