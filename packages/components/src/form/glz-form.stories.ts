@@ -100,7 +100,7 @@ export const WithValidation: Story = {
         label="Email"
         name="email"
         type="email"
-        placeholder="your@email.com"
+        placeholder="you@example.com"
         required
         data-form-field
       ></glz-input>
