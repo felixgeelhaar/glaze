@@ -32,8 +32,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
-          
           # Publish in dependency order
           cd packages/tokens && npm publish --access public || echo "Already published"
           cd ../components && npm publish --access public || echo "Already published"
